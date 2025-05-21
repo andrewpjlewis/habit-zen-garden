@@ -71,7 +71,11 @@ h2, label{
 }
 
 html{
-  background-color: $secondary-background-color;
+  //background-color: $secondary-background-color;//
+  background-image: url('../images/Sunny\ Garden\ Haven.png');
+  background-repeat: no-repeat;
+  background-size: 1615px, 1000px;
+  background-position: center;
 }
 
 //classes//
@@ -81,7 +85,7 @@ html{
   margin-right: auto;
   margin-top: 20px;
   padding: 20px;
-  background-image: url('./../images/Wooden\ Signboard\ with\ Natural\ Grain.png');
+  background-image: url('../images/Wooden\ Signboard\ with\ Natural\ Grain.png');
   background-repeat: no-repeat;
   background-size: 400px 500px;
   background-position: center;
