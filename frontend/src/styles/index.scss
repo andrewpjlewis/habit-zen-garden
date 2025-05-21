@@ -12,8 +12,12 @@ label, input, button{
 
 //colors//
 
+$lighter-primary-color: #eca554;
 $primary-color: #9f6a2f;
 $darker-primary-color: #4f3517;
+$secondary-color: #FFC84D;
+$darkest-secondary-color: #5e4a20;
+$secondary-background-color: #5dc6e7;
 
 //elements//
 
@@ -29,6 +33,15 @@ form{
         border-radius: 10px;
         border: 3px solid $darker-primary-color;
         padding: 5px;
+        background-color: $secondary-color;
+        color: $darkest-secondary-color;
+        font-size: 1em;
+
+        &:hover{
+            background-color: $darkest-secondary-color;
+            color: white;
+            border: 3px solid $lighter-primary-color;
+        }
     }
 
     div{
@@ -57,7 +70,7 @@ h2, label{
 }
 
 html{
-  background-color: #5dc6e7;
+  background-color: $secondary-background-color;
 }
 
 //classes//
@@ -70,4 +83,5 @@ html{
   background-color: #9f6a2f;
   border-radius: 20px;
   max-width: 300px;
+  box-shadow: 0px 20px 40px black;
 }
