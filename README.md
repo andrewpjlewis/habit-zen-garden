@@ -6,9 +6,9 @@ Repository for developing the Habit Zen Garden app – a MERN stack application 
 
 ## 🛠 Tech Stack
 
-- **Frontend**: React, CSS Modules/Tailwind (if used), Axios
+- **Frontend**: React, CSS Modules
 - **Backend**: Node.js, Express, MongoDB, Mongoose
-- **Other**: JWT Authentication, dotenv, concurrently (optional)
+- **Other**: dotenv
 
 ---
 
@@ -26,3 +26,7 @@ npm install
 
 ### 3. Set up environment variables (.env)
 MONGO_URI=
+
+### 4. Deploy Link
+FRONTEND - https://habit-zen-garden-frontend.onrender.com
+BACKEND - https://habit-zen-garden.onrender.com/
