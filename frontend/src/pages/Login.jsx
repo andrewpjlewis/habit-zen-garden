@@ -1,25 +1,39 @@
-// Purpose: This is the login screen where users enter their credentials.
-// Contains: A login form, handlers for form submission, and 
-//    API call to your backend (e.g., /api/login).
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function Login() {
-    // Local state to track from inputs
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState(''); // used as email
     const [password, setPassword] = useState('');
-
     const { login } = useAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // backend code goes here
 
-        login({ username });
-        navigate('/dashboard');
+        try {
+            const res = await fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: username, password })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                alert(data.message || 'Login failed');
+                return;
+            }
+
+            console.log('✅ Login successful:', data);
+            login({ userId: data.userId });
+            navigate('/dashboard');
+        } catch (error) {
+            console.error('❌ Login error:', error);
+            alert('Login failed. Please try again.');
+        }
     };
 
     return (
@@ -27,9 +41,9 @@ function Login() {
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Username:</label><br />
+                    <label>Email:</label><br />
                     <input
-                        type="username"
+                        type="email"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
@@ -52,4 +66,4 @@ function Login() {
     );
 }
 
-export default Login
+export default Login;
