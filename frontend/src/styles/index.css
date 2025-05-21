@@ -10,6 +10,14 @@ label, input, button {
 body {
   margin: 0;
   font-family: sans-serif;
+  padding: 0;
+  height: 100vh;
+  background-image: url("../images/backround.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
 }
 
 form {
@@ -58,55 +66,6 @@ html {
   background-position: center;
 }
 
-.login-container {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  padding: 20px;
-  background-image: url("../images/Wooden Signboard with Natural Grain.png");
-  background-repeat: no-repeat;
-  background-size: 400px 500px;
-  background-position: center;
-  border-radius: 20px;
-  border: 5px solid #9f6a2f;
-  max-width: 300px;
-  box-shadow: 0px 20px 40px #234a56;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  background-image: url("../images/backround.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  color: white;
-}
-
-.top-bar, .bottom-bar {
-  background-color: rgb(49, 152, 49);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.top-bar {
-  height: 130px;
-  position: relative; /* needed for absolutely positioned child */
-}
-
-.left-image {
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 80px;
-}
-
 .bottom-bar {
   height: 130px;
   background-color: rgb(49, 152, 49);
@@ -128,7 +87,42 @@ body {
   text-align: center;
 }
 
+.left-image {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 80px;
+}
+
+.login-container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  padding: 20px;
+  background-image: url("../images/Wooden Signboard with Natural Grain.png");
+  background-repeat: no-repeat;
+  background-size: 400px 500px;
+  background-position: center;
+  border-radius: 20px;
+  border: 5px solid #9f6a2f;
+  max-width: 300px;
+  box-shadow: 0px 20px 40px #234a56;
+}
+
 svg {
   width: 100px;
   height: 100px;
+}
+
+.top-bar {
+  height: 130px;
+  position: relative; /* needed for absolutely positioned child */
+}
+
+.top-bar, .bottom-bar {
+  background-color: rgb(49, 152, 49);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }/*# sourceMappingURL=index.css.map */
