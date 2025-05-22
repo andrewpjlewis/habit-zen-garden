@@ -2,7 +2,7 @@ import React from 'react';
 
 function Dashboard() {
     return (
-<body>
+<main>
 
   <div class="top-bar">
 
@@ -23,7 +23,78 @@ function Dashboard() {
 
 
   <div class="content">
-    <h1>Welcome to the Home Page</h1>
+    <a href="/dashboard/plant1" class="plant" id="plant1">
+      <div>
+        <img width="40px" height="40px" src="../images/fire.png"></img>
+        <p>17</p>
+        <h3>Read Scriptures</h3>
+        <img></img>
+      </div>
+    </a>
+    <a href="/dashboard/plant2" class="plant" id="plant2">
+      <div>
+        <svg></svg>
+        <p>3</p>
+        <h3>Make Bed</h3>
+        <img></img>
+      </div>
+    </a>
+    <a href="/dashboard/plant3" class="plant" id="plant3">
+      <div>
+        <svg></svg>
+        <p>11</p>
+        <h3>Workout</h3>
+        <img></img>
+      </div>
+    </a>
+    <a href="/dashboard/plant4" class="plant" id="plant4">
+      <div>
+        <svg></svg>
+        <p>8</p>
+        <h3>Wash Dishes</h3>
+        <img></img>
+      </div>
+    </a>
+    <a href="/dashboard/plant5" class="plant" id="plant5">
+      <div>
+        <svg></svg>
+        <p>19</p>
+        <h3>Run 1 Mile</h3>
+        <img></img>
+      </div>
+    </a>
+    <a href="/dashboard/plant6" class="plant" id="plant6">
+      <div>
+        <svg></svg>
+        <p>2</p>
+        <h3>Brush Teeth</h3>
+        <img></img>
+      </div>
+    </a>
+    <a href="/dashboard/plant7" class="plant" id="plant7">
+      <div>
+        <svg></svg>
+        <p>15</p>
+        <h3>Mow Lawn</h3>
+        <img></img>
+      </div>
+    </a>
+    <a href="/dashboard/plant8" class="plant" id="plant8">
+      <div>
+        <svg></svg>
+        <p>6</p>
+        <h3>Fold Laundry</h3>
+        <img></img>
+      </div>
+    </a>
+    <a href="/dashboard/plant9" class="plant" id="plant9">
+      <div>
+        <svg></svg>
+        <p>13</p>
+        <h3>Take out Trash</h3>
+        <img></img>
+      </div>
+    </a>
   </div>
 
 <div class="bottom-bar">
@@ -52,7 +123,7 @@ function Dashboard() {
 
 
 
-</body>
+</main>
 
 
 
