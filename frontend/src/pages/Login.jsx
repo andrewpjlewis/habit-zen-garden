@@ -29,7 +29,7 @@ function Login() {
 
             console.log('✅ Login successful:', data);
             login({ userId: data.userId });
-            navigate('/dashboard');
+            navigate('/welcome');
         } catch (error) {
             console.error('❌ Login error:', error);
             alert('Login failed. Please try again.');

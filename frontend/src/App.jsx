@@ -3,6 +3,7 @@ import { useAuth } from './context/AuthContext';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import AddHabit from './pages/AddHabit';
+import Welcome from './pages/Welcome';
 
 function App() {
   const { isLoggedIn } = useAuth();
@@ -11,6 +12,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route 
+          path="/welcome" 
+          element={isLoggedIn ? <Welcome /> : <Navigate to="/login" />} 
+        />
         <Route 
           path="/dashboard" 
           element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} 
