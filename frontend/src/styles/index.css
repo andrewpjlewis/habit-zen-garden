@@ -25,6 +25,20 @@ body {
   background-repeat: no-repeat;
 }
 
+button[type=submit] {
+  background-color: #9f6a2f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+button[type=submit]:hover {
+  background-color: #4f3517;
+}
+
 form {
   text-align: center;
 }
@@ -332,18 +346,35 @@ svg {
   font-size: 1em;
 }
 
-button[type=submit] {
-  background-color: #9f6a2f;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 12px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background-color 0.2s;
+.welcomeMessage {
+  background-color: white;
+  padding: 20px;
+  height: 100%;
+  min-height: 690px;
+  min-width: 500px;
 }
-button[type=submit]:hover {
-  background-color: #4f3517;
+.welcomeMessage_header {
+  background-color: darkgray;
+  padding: 20px;
+  border-radius: 20px;
+}
+.welcomeMessage_header h1 {
+  margin-top: 40px;
+  margin-bottom: 0px;
+  text-align: center;
+  font-size: 3em;
+  color: white;
+  text-shadow: 0px 10px 5px #000000;
+}
+.welcomeMessage_header h3 {
+  text-align: center;
+  margin-top: 0px;
+}
+.welcomeMessage button {
+  float: right;
+  border-radius: 15px;
+  padding: 5px;
+  border: 3px solid darkgray;
 }
 
 /* Button without background */

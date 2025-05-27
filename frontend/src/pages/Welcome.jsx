@@ -13,8 +13,13 @@ function Welcome() {
     return (
         <main>
             <Header />
-                <button onClick={(closeTutorial)}>❌</button>
-                <h1>Welcome</h1>
+                <div class="welcomeMessage">
+                    <button onClick={(closeTutorial)}>❌</button>
+                    <div class="welcomeMessage_header">
+                        <h1>Welcome</h1>
+                        <h3>Let's get started</h3>
+                    </div>
+                </div>
             <Footer />
         </main>
     )

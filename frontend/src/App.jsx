@@ -3,6 +3,7 @@ import { useAuth } from './context/AuthContext';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import AddHabit from './pages/AddHabit';
+import Welcome from './pages/Welcome';
 
 function App() {
   const { isLoggedIn } = useAuth();
