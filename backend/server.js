@@ -1,36 +1,35 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const dotenv = require('dotenv');
 dotenv.config();
 
+const connectDB = require('./database/db');
+
 const app = express();
+
+// Connect to the database
+connectDB();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+  cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 day
 }));
+
 app.use(flash());
 
 // Routes
 const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
-
-// MongoDB connection
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => console.log('✅ MongoDB connected'))
-  .catch((err) => {
-    console.error('❌ MongoDB connection error:', err.message);
-    process.exit(1);
-  });
 
 app.get('/', (req, res) => res.send('API Running'));
 
