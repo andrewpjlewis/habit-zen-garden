@@ -178,8 +178,10 @@ svg {
 
 .bottom-bar {
   flex: 0 0 130px;
-  position: sticky;
-  bottom: 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0 /*or 23%*/;
+  left: 0;
   z-index: 10;
   background-color: rgb(49, 152, 49);
   display: flex;
@@ -444,68 +446,3 @@ svg {
   }
 }
 
-/* --- Media queries for tablets and up --- */
-
-@media (min-width: 600px) {
-  .top-bar {
-    height: 90px;
-    padding: 0 2rem;
-  }
-
-  svg {
-    width: 100px;
-    height: 100px;
-  }
-
-  .left-image {
-    height: 80px;
-  }
-
-  .content {
-    max-width: 770px;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 20px;
-  }
-
-  .plant {
-    height: 185px;
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    background-size: cover;
-  }
-
-  .top-bar {
-    height: 130px;
-  }
-
-  svg {
-    width: 120px;
-    height: 120px;
-  }
-
-  .left-image {
-    height: 100px;
-  }
-
-  .content {
-    max-width: 770px;
-    grid-template-columns: 10px 250px 250px 250px 10px;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 30px;
-  }
-
-  /* Reapply plant grid placement if needed */
-  #plant1 { grid-column: 2; grid-row: 1; }
-  #plant2 { grid-column: 3; grid-row: 1; }
-  #plant3 { grid-column: 4; grid-row: 1; }
-  #plant4 { grid-column: 2; grid-row: 2; }
-  #plant5 { grid-column: 3; grid-row: 2; }
-  #plant6 { grid-column: 4; grid-row: 2; }
-  #plant7 { grid-column: 2; grid-row: 3; }
-  #plant8 { grid-column: 3; grid-row: 3; }
-  #plant9 { grid-column: 4; grid-row: 3; }
-}
