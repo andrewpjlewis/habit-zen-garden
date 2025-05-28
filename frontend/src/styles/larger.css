@@ -1,4 +1,4 @@
-@media screen and (min-width: 45em) {
+@media screen and (min-width: 35em) {
   svg {
     width: 100px;
     height: 100px;
@@ -6,6 +6,9 @@
   /*Classes*/
   .bottom-bar {
     bottom: 0;
+    width: 100%;
+    max-width: 500px;
+    left: auto;
   }
   .content {
     max-width: 770px;
@@ -27,6 +30,9 @@
 @media screen and (min-width: 80em) {
   body {
     background-size: cover;
+  }
+  .bottom-bar {
+    max-width: 775px;
   }
   .top-bar {
     height: 130px;
