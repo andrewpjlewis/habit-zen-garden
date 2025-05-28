@@ -7,16 +7,45 @@ const plants = [
   { id: 3, name: 'Plant 3', img: 'plant3.png' },
 ];
 
-function AddHabitForm() {
+function AddHabit({ onAddHabit }) {
   const [selectedPlant, setSelectedPlant] = useState(plants[0].id);
   const [goalName, setGoalName] = useState('');
+  const [frequency, setFrequency] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!goalName.trim() || !frequency) {
+      alert('Please enter a goal name and frequency');
+      return;
+    }
+
+    const newHabit = {
+      id: Date.now(),
+      name: goalName.trim(),
+      frequency: Number(frequency),
+      plantId: selectedPlant,
+    };
+
+    onAddHabit(newHabit);
+
+    // Show success message
+    setSuccessMessage('Plant added!');
+
+    // Reset form fields
+    setGoalName('');
+    setFrequency('');
+    setSelectedPlant(plants[0].id);
+
+    // Hide success message after 3 seconds
+    setTimeout(() => setSuccessMessage(''), 3000);
+  };
 
   return (
     <div className="add-habit-form-container">
-      <form className="add-habit-form" onSubmit={(e) => e.preventDefault()}>
-        {/* Carousel */}
+      <form className="add-habit-form" onSubmit={handleSubmit}>
         <div className="plant-picker">
-          {plants.map((plant, idx) => {
+          {plants.map((plant) => {
             const isCenter = plant.id === selectedPlant;
             return (
               <div
@@ -29,9 +58,8 @@ function AddHabitForm() {
             );
           })}
         </div>
-          <p className="habit-title">Select Your Plant</p>
+        <p className="habit-title">Select Your Plant</p>
 
-        {/* Input area for goal name */}
         <div className="goal-name-box">
           <input
             type="text"
@@ -42,16 +70,24 @@ function AddHabitForm() {
           <FaPencilAlt className="pencil-icon" />
         </div>
 
-        {/* Frequency setup */}
         <div className="frequency-section">
           <h3>How often will you complete this goal?</h3>
-          <input type="number" min="1" placeholder="Times per week" />
+          <input
+            type="number"
+            min="1"
+            placeholder="Times per week"
+            value={frequency}
+            onChange={(e) => setFrequency(e.target.value)}
+          />
         </div>
 
         <button type="submit">Add Habit</button>
+
+        {/* Show success message */}
+        {successMessage && <p className="success-message">{successMessage}</p>}
       </form>
     </div>
   );
 }
 
-export default AddHabitForm;
+export default AddHabit;
