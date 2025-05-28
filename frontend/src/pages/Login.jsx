@@ -5,25 +5,40 @@ import { useAuth } from '../context/AuthContext';
 function Login() {
     const [username, setUsername] = useState(''); // used as email
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         try {
-            const res = await fetch('https://habit-zen-garden-frontend.onrender.com/api/auth/login', {
+            const res = await fetch('https://habit-zen-garden.onrender.com/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ email: username, password })
+                body: JSON.stringify({ email: username.trim(), password })
             });
 
-            const data = await res.json();
+            // Debug: log raw response text before parsing JSON
+            const text = await res.text();
+            console.log('Raw response text:', text);
+
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (jsonErr) {
+                console.error('❌ Failed to parse JSON:', jsonErr);
+                alert('Unexpected server response. Please try again.');
+                setLoading(false);
+                return;
+            }
 
             if (!res.ok) {
                 alert(data.message || 'Login failed');
+                setLoading(false);
                 return;
             }
 
@@ -33,6 +48,8 @@ function Login() {
         } catch (error) {
             console.error('❌ Login error:', error);
             alert('Login failed. Please try again.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -47,6 +64,7 @@ function Login() {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
+                        disabled={loading}
                     />
                 </div>
 
@@ -57,26 +75,30 @@ function Login() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
+                        disabled={loading}
                     />
                 </div>
 
-                <button type="submit">Log In</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Logging in...' : 'Log In'}
+                </button>
             </form>
             <p style={{ marginTop: '1rem' }}>
                 Don't have an account?{' '}
-                <button 
-                  onClick={() => navigate('/register')} 
-                  style={{ 
-                    background: 'none', 
-                    border: 'none', 
-                    color: 'blue', 
-                    textDecoration: 'underline', 
-                    cursor: 'pointer', 
-                    padding: 0,
-                    fontSize: '1rem'
-                  }}
+                <button
+                    onClick={() => navigate('/register')}
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        color: 'blue',
+                        textDecoration: 'underline',
+                        cursor: 'pointer',
+                        padding: 0,
+                        fontSize: '1rem'
+                    }}
+                    disabled={loading}
                 >
-                  Register here
+                    Register here
                 </button>
             </p>
         </div>

@@ -35,3 +35,30 @@ Content-Type: application/json
 
 ### Mark habit as completed
 PATCH http://localhost:5000/api/habits/<habitId>/complete
+
+
+###
+### Register User
+POST https://habit-zen-garden.onrender.com/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Sam",
+  "email": "sam@example.com",
+  "password": "123456"
+}
+
+### Login User
+POST https://habit-zen-garden.onrender.com/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "sam@example.com",
+  "password": "123456"
+}
+
+### Get All Users
+GET https://habit-zen-garden.onrender.com/api/auth/all
+
+### Delete User by Email
+DELETE https://habit-zen-garden.onrender.com/api/auth/email/sam@example.com
