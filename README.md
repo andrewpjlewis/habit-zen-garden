@@ -37,6 +37,7 @@ replace code in package.json with the following:
 <!-- navigate to backend folder -->
 cd backend
 npm install
+npm install bcrypt express-session connect-flash
 <!-- navigate to frontend folder -->
 cd ../frontend
 npm install
