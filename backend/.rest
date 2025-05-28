@@ -6,9 +6,9 @@ POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-  "name": "Andrew",
-  "email": "andrew@example.com",
-  "password": "password"
+  "name": "Billy",
+  "email": "billy@gmail.com",
+  "password": "billy"
 }
 
 ### Login user
@@ -16,13 +16,13 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "andrew@example.com",
-  "password": "password"
+  "email": "billy@gmail.com",
+  "password": "billy"
 }
 
 
 ### Delete user by email
-DELETE http://localhost:5000/api/auth/email/andrew@example.com
+DELETE http://localhost:5000/api/auth/email/sam@example.com
 
 ### Create a new habit (you may need to provide userId depending on frontend handling)
 POST http://localhost:5000/api/habits

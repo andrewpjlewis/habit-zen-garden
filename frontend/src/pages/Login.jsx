@@ -12,7 +12,7 @@ function Login() {
         e.preventDefault();
 
         try {
-            const res = await fetch('https://habit-zen-garden.onrender.com/api/auth/login', {
+            const res = await fetch('http://localhost:5000/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -62,6 +62,23 @@ function Login() {
 
                 <button type="submit">Log In</button>
             </form>
+            <p style={{ marginTop: '1rem' }}>
+                Don't have an account?{' '}
+                <button 
+                  onClick={() => navigate('/register')} 
+                  style={{ 
+                    background: 'none', 
+                    border: 'none', 
+                    color: 'blue', 
+                    textDecoration: 'underline', 
+                    cursor: 'pointer', 
+                    padding: 0,
+                    fontSize: '1rem'
+                  }}
+                >
+                  Register here
+                </button>
+            </p>
         </div>
     );
 }
