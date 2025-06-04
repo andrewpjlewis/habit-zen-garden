@@ -46,7 +46,6 @@ app.use(session({
 
 app.use(flash());
 
-app.options('*', cors());
 
 // ✅ Routes
 app.use('/api/auth', authRoutes);
