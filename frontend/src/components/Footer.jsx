@@ -8,6 +8,12 @@ function Footer({ onAddClick }) {
         setShowSettings(prev => !prev);
     };
 
+      const handleLogout = () => {
+        // Example: clear token and redirect
+        localStorage.removeItem('token');
+        window.location.href = '/login';
+    };
+
     useEffect(() => {
         function handleClickOutside(event) {
             if (settingsRef.current && !settingsRef.current.contains(event.target)) {
@@ -53,10 +59,8 @@ function Footer({ onAddClick }) {
             {/* Settings panel appears here */}
             {showSettings && (
             <div ref={settingsRef} className="settings-panel">
-                <ul>
-                    <li>Help</li>
-                    <li>Logout</li>
-                </ul>
+                {/* <button onClick={onHelp}>Help</button> */}
+                <button onClick={handleLogout}>Logout</button>
             </div>
             )}
         </div>
