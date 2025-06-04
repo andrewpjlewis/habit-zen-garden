@@ -1,31 +1,39 @@
-// Purpose: Manages user authentication state (logged in or not).
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    // Load user data from localStorage on initial render
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+    if (token && userId) {
+      return { token, userId };
+    }
+    return null;
+  });
 
-    // Function to log in
-    const login = (userData) => {
-        setIsLoggedIn(true);
-        setUser(userData);
-    };
+  const isLoggedIn = Boolean(user && user.token);
 
-    // Function to log out
-    const logout = () => {
-        setIsLoggedIn(false);
-        setUser(null);
-    };
+  const login = (userData) => {
+    setUser(userData);
+    localStorage.setItem('token', userData.token);
+    localStorage.setItem('userId', userData.userId);
+  };
 
-    return (
-        <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+  };
+
+  return (
+    <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export function useAuth() {
-    return useContext(AuthContext);
+  return useContext(AuthContext);
 }

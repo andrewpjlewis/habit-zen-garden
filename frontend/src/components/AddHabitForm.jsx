@@ -13,33 +13,49 @@ function AddHabit({ onAddHabit }) {
   const [frequency, setFrequency] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!goalName.trim() || !frequency) {
-      alert('Please enter a goal name and frequency');
-      return;
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!goalName.trim() || !frequency) {
+    alert('Please enter a goal name and frequency');
+    return;
+  }
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+    alert('You must be logged in');
+    return;
+  }
+
+  try {
+    const response = await fetch('https://habit-zen-garden.onrender.com/api/habits', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name: goalName.trim(),
+        plantType: `plant${selectedPlant}`,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Something went wrong');
     }
 
-    const newHabit = {
-      id: Date.now(),
-      name: goalName.trim(),
-      frequency: Number(frequency),
-      plantId: selectedPlant,
-    };
-
+    const newHabit = await response.json();
     onAddHabit(newHabit);
-
-    // Show success message
     setSuccessMessage('Plant added!');
-
-    // Reset form fields
     setGoalName('');
     setFrequency('');
     setSelectedPlant(plants[0].id);
-
-    // Hide success message after 3 seconds
     setTimeout(() => setSuccessMessage(''), 3000);
-  };
+  } catch (err) {
+    console.error('Error adding habit:', err);
+    alert(err.message);
+  }
+};
 
   return (
     <div className="add-habit-form-container">
