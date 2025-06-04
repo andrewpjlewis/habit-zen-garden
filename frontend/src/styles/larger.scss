@@ -9,7 +9,7 @@
   .bottom-bar{
     bottom: 0;
     width: 100%;
-    max-width: 500px;
+    max-width: 775px;
     left: auto;
   }
 
@@ -37,10 +37,6 @@
 @media screen and (min-width: 80em) {
   body {
     background-size: cover;
-  }
-
-  .bottom-bar{
-    max-width: 775px;
   }
 
   .top-bar {

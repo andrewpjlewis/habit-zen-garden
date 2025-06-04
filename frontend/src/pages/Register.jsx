@@ -80,20 +80,15 @@ function Register() {
           {loading ? 'Registering...' : 'Register'}
         </button>
       </form>
-      <p>
+      <p id="registerNotification">
         Already have an account?{' '}
         <button
+          id="registerButton"
           onClick={() => navigate('/login')}
           className="link-button"
           disabled={loading}
           style={{
-            background: 'none',
-            border: 'none',
-            color: 'blue',
-            textDecoration: 'underline',
-            cursor: loading ? 'not-allowed' : 'pointer',
-            padding: 0,
-            fontSize: '1rem'
+            cursor: loading ? 'not-allowed' : 'pointer'
           }}
         >
           Log in here

@@ -147,6 +147,15 @@ svg {
   bottom: 10px;
 }
 
+.link-button{
+  background: none;
+  border: none;
+  color: white;
+  text-decoration: none;
+  padding: 0;
+  font-size: 1rem;
+}
+
 .login-container {
   background-image: url('../images/Wooden Signboard with Natural Grain.png');
   background-repeat: no-repeat;
@@ -247,6 +256,81 @@ svg {
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.9);
+  }
+}
+
+.register-container {
+  background-image: url('../images/Wooden Signboard with Natural Grain.png');
+  background-repeat: no-repeat;
+  /*background-size: contain;*/
+  background-position: center;
+  margin-top: 20px;
+  
+  width: 320px;
+  /*padding: 30px 25px;*/
+  border-radius: 20px;
+  box-shadow: 0px 10px 30px 5px rgba(0, 0, 0);
+  
+  /* Make sure it can grow if needed */
+  max-width: 90vw;
+  box-sizing: border-box;
+  text-align: center;
+  
+  /* text colors */
+  color: white;
+
+  h2 {
+    font-size: 2em;
+    padding-top: 10px;
+    margin: 0px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      label {
+        margin-bottom: -5px;
+        color: white;
+        font-weight: 600;
+      }
+
+      input {
+        border-radius: 10px;
+        height: 35px;
+        border: 3px solid $darker-primary-color;
+        outline: none;
+        padding: 0 10px;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 1em;
+      }
+    }
+
+    button {
+      border-radius: 10px;
+      border: 3px solid $darker-primary-color;
+      padding: 5px;
+      margin: 25px 10px;
+      background-color: $secondary-color;
+      color: $darkest-secondary-color;
+      font-size: 1.1em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+
+      &:hover {
+        background-color: $darkest-secondary-color;
+        color: white;
+        border-color: $lighter-primary-color;
+      }
+    }
   }
 }
 
