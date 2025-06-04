@@ -84,19 +84,11 @@ function Login() {
           {loading ? 'Logging in...' : 'Log In'}
         </button>
       </form>
-      <p style={{ marginTop: '1rem' }}>
+      <p id="registerNotification">
         Don't have an account?{' '}
         <button
           onClick={() => navigate('/register')}
-          style={{
-            background: 'none',
-            border: 'none',
-            color: 'blue',
-            textDecoration: 'underline',
-            cursor: 'pointer',
-            padding: 0,
-            fontSize: '1rem'
-          }}
+          id="registerButton"
           disabled={loading}
         >
           Register here

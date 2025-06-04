@@ -49,7 +49,7 @@ function Dashboard() {
             <Plant key={habit._id} habit={habit} />
           ))
         ) : (
-          <p>No habits found. Add some habits to get started!</p>
+          <p id="contentBlank">No habits found. Add some habits to get started!</p>
         )}
       </div>
       <Footer onAddClick={goToAddHabit} />
