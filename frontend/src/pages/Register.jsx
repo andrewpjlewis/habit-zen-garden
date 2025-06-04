@@ -5,10 +5,12 @@ function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');  // same as username in Login
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const res = await fetch('https://habit-zen-garden.onrender.com/api/auth/register', {
@@ -23,6 +25,7 @@ function Register() {
 
       if (!res.ok) {
         alert(data.message || 'Registration failed');
+        setLoading(false);
         return;
       }
 
@@ -31,6 +34,8 @@ function Register() {
     } catch (error) {
       console.error('❌ Registration error:', error);
       alert('Registration failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,6 +50,7 @@ function Register() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            disabled={loading}
           />
         </div>
 
@@ -55,6 +61,7 @@ function Register() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            disabled={loading}
           />
         </div>
 
@@ -65,14 +72,30 @@ function Register() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            disabled={loading}
           />
         </div>
 
-        <button type="submit">Register</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Registering...' : 'Register'}
+        </button>
       </form>
       <p>
         Already have an account?{' '}
-        <button onClick={() => navigate('/login')} className="link-button">
+        <button
+          onClick={() => navigate('/login')}
+          className="link-button"
+          disabled={loading}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: 'blue',
+            textDecoration: 'underline',
+            cursor: loading ? 'not-allowed' : 'pointer',
+            padding: 0,
+            fontSize: '1rem'
+          }}
+        >
           Log in here
         </button>
       </p>
