@@ -1,6 +1,29 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 function Footer({ onAddClick }) {
+    const [showSettings, setShowSettings] = useState(false);
+    const settingsRef = useRef(null);
+
+    const toggleSettings = () => {
+        setShowSettings(prev => !prev);
+    };
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+                setShowSettings(false);
+            }
+        }
+
+        if (showSettings) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showSettings]);
+
     return (
         <div className="bottom-bar">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="bottom-icon">
@@ -23,9 +46,19 @@ function Footer({ onAddClick }) {
                 <path fill="currentColor" d="M19 4h-2V3a1 1 0 0 0-2 0v1H9V3a1 1 0 0 0-2 0v1H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3m1 15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7h16Zm0-9H4V7a1 1 0 0 1 1-1h2v1a1 1 0 0 0 2 0V6h6v1a1 1 0 0 0 2 0V6h2a1 1 0 0 1 1 1Z"/>
             </svg>
 
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="bottom-icon">
+            <svg onClick={toggleSettings} id="settings-button" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="bottom-icon">
                 <path fill="currentColor" d="m9.25 22l-.4-3.2q-.325-.125-.612-.3t-.563-.375L4.7 19.375l-2.75-4.75l2.575-1.95Q4.5 12.5 4.5 12.338v-.675q0-.163.025-.338L1.95 9.375l2.75-4.75l2.975 1.25q.275-.2.575-.375t.6-.3l.4-3.2h5.5l.4 3.2q.325.125.613.3t.562.375l2.975-1.25l2.75 4.75l-2.575 1.95q.025.175.025.338v.674q0 .163-.05.338l2.575 1.95l-2.75 4.75l-2.95-1.25q-.275.2-.575.375t-.6.3l-.4 3.2zm2.8-6.5q1.45 0 2.475-1.025T15.55 12t-1.025-2.475T12.05 8.5q-1.475 0-2.488 1.025T8.55 12t1.013 2.475T12.05 15.5"/>
             </svg>
+
+            {/* Settings panel appears here */}
+            {showSettings && (
+            <div ref={settingsRef} className="settings-panel">
+                <ul>
+                    <li>Help</li>
+                    <li>Logout</li>
+                </ul>
+            </div>
+            )}
         </div>
     );
 }
