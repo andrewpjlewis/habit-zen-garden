@@ -29,7 +29,6 @@ body {
   align-items: center;
   flex-direction: column;
   font-family: sans-serif;
-  background-image: url('../images/backround.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -102,6 +101,11 @@ label {
   color: white;
 }
 
+main {
+  margin: 0;
+  background-image: url('../images/backround.png');
+}
+
 svg {
   width: 80px;
   height: 80px;
@@ -113,9 +117,12 @@ svg {
   &-bar {
     flex: 0 0 130px;
     position: fixed;
-    width: 100%;
-    bottom: 0 /*or 23%*/;
+    bottom: 0;
     left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 31.75rem;
+    margin: 0 auto;
     z-index: 10;
     background-color: rgb(49, 152, 49);
     display: flex;
@@ -137,6 +144,7 @@ svg {
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
   box-sizing: border-box;
+  height: 100vh;
 }
 
 .left-image {
