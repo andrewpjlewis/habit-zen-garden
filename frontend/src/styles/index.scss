@@ -543,6 +543,20 @@ svg {
   border-radius: 20px;
 }
 
+#logout {
+  background-color: transparent;
+  color: black;
+  font-weight: 300px;
+  border-style: none;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 20px;
+  &:hover{
+    background-color: $transparent-black;
+    color: white;
+  }
+}
+
 #registerNotification {
   background-color: $transparent-black;
   color: white;
