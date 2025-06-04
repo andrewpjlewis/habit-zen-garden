@@ -41,19 +41,21 @@ function Dashboard() {
   };
 
   return (
-    <main>
+    <>
       <Header />
-      <div className="content">
-        {habits.length > 0 ? (
-          habits.map((habit) => (
-            <Plant key={habit._id} habit={habit} />
-          ))
-        ) : (
-          <p id="contentBlank">No habits found. Add some habits to get started!</p>
-        )}
-      </div>
+      <main>
+        <div className="content">
+          {habits.length > 0 ? (
+            habits.map((habit) => (
+              <Plant key={habit._id} habit={habit} />
+            ))
+          ) : (
+            <p id="contentBlank">No habits found. Add some habits to get started!</p>
+          )}
+        </div>
+      </main>
       <Footer onAddClick={goToAddHabit} />
-    </main>
+    </>
   );
 }
 
