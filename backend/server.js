@@ -2,13 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const flash = require('connect-flash');
 const dotenv = require('dotenv');
 dotenv.config();
 
 const connectDB = require('./database/db');
 const authRoutes = require('./routes/authRoutes');
-const habitRoutes = require('./routes/habits'); // ✅ Mount this
+const habitRoutes = require('./routes/habits');
 
 const app = express();
 
@@ -43,9 +42,6 @@ app.use(session({
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
   cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }));
-
-app.use(flash());
-
 
 // ✅ Routes
 app.use('/api/auth', authRoutes);

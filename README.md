@@ -37,7 +37,7 @@ replace code in package.json with the following:
 <!-- navigate to backend folder -->
 cd backend
 npm install
-npm install bcrypt express-session connect-mongo connect-flash cors jsonwebtoken
+npm install express cors express-session connect-mongo dotenv mongoose bcrypt jsonwebtoken
 <!-- navigate to frontend folder -->
 cd ../frontend
 npm install
