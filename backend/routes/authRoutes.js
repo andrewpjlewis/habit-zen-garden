@@ -6,7 +6,7 @@ const User = require('../models/User');
 const router = express.Router();
 
 // Number of salt rounds for bcrypt hashing
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
+const JWT_SECRET = process.env.JWT_SECRET;
 const SALT_ROUNDS = 10;
 
 router.post('/register', async (req, res, next) => {
@@ -15,7 +15,7 @@ router.post('/register', async (req, res, next) => {
     const existingUser = await User.findOne({ email }).lean();
     if (existingUser) return res.status(400).json({ message: 'User already exists' });
 
-    const newUser = new User({ name, email, password }); // password will be hashed by the model
+    const newUser = new User({ name, email, password });
     await newUser.save();
 
     res.status(201).json({ message: 'User registered successfully' });

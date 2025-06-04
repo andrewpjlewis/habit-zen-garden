@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/', verifyToken, async (req, res, next) => {
   try {
     const { name, plantType } = req.body;
-    const userId = req.user._id; // Comes from token
+    const userId = req.user._id;
 
     const newHabit = new Habit({ name, plantType, userId });
     await newHabit.save();
