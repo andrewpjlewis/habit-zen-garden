@@ -1,13 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.1aa64033.css",
-    "main.js": "/static/js/main.ab4f47c5.js",
+    "main.css": "/static/css/main.31339264.css",
+    "main.js": "/static/js/main.3806841c.js",
+    "static/media/Wooden Signboard with Natural Grain.png": "/static/media/Wooden Signboard with Natural Grain.19b64db478b6d2b357b1.png",
+    "static/media/Sunny Garden Haven.png": "/static/media/Sunny Garden Haven.2756110c60c53bf40891.png",
+    "static/media/backround.png": "/static/media/backround.9c55de658d2cd6e2c0d7.png",
     "index.html": "/index.html",
-    "main.1aa64033.css.map": "/static/css/main.1aa64033.css.map",
-    "main.ab4f47c5.js.map": "/static/js/main.ab4f47c5.js.map"
+    "main.31339264.css.map": "/static/css/main.31339264.css.map",
+    "main.3806841c.js.map": "/static/js/main.3806841c.js.map"
   },
   "entrypoints": [
-    "static/css/main.1aa64033.css",
-    "static/js/main.ab4f47c5.js"
+    "static/css/main.31339264.css",
+    "static/js/main.3806841c.js"
   ]
 }
