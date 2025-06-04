@@ -498,4 +498,24 @@ svg {
   padding: 0;
   font-size: 1rem;
   font-weight: 500px;
+}
+
+.bottom-bar svg {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.bottom-bar svg:hover {
+  transform: scale(1.05);
+}
+
+.settings-panel {
+  position: absolute;
+  bottom: 80px; /* Above bottom bar */
+  right: 20px;
+  background: white;
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 10px;
+  z-index: 100;
 }/*# sourceMappingURL=index.css.map */
