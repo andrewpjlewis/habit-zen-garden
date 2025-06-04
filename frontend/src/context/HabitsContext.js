@@ -15,8 +15,6 @@ export function HabitsProvider({ children }) {
     return;
   }
 
-  console.log('Using token:', user.token)
-
   const fetchHabits = async () => {
     try {
       const res = await fetch('https://habit-zen-garden.onrender.com/api/habits', {

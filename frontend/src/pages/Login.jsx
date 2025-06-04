@@ -21,7 +21,6 @@ function Login() {
       });
 
       const text = await res.text();
-      console.log('Raw response text:', text);
 
       let data;
       try {
@@ -43,7 +42,6 @@ function Login() {
 
       // Pass userId and token to AuthContext login
       login({ userId: data.userId, token: data.token });
-      console.log('Login user:', { userId: data.userId, token: data.token });
 
       navigate('/welcome');
     } catch (error) {
