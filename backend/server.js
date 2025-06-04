@@ -7,10 +7,12 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const connectDB = require('./database/db');
+const authRoutes = require('./routes/authRoutes');
+const habitRoutes = require('./routes/habits'); // ✅ Mount this
 
 const app = express();
 
-// Connect to the database
+// Connect to DB
 connectDB();
 
 // Middleware
@@ -22,18 +24,18 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
-  cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 day
+  cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }));
 
 app.use(flash());
 
-// Routes
-const authRoutes = require('./routes/authRoutes');
+// ✅ Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/habits', habitRoutes);
 
 app.get('/', (req, res) => res.send('API Running'));
 
-// Error handling
+// Error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: 'Something broke!' });

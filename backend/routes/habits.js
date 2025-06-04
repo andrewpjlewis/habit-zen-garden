@@ -1,16 +1,30 @@
 const express = require('express');
 const Habit = require('../models/Habit');
+const verifyToken = require('../middleware/verifyToken');
+
 const router = express.Router();
 
-router.post('/', async (req, res, next) => {
+// 🔐 Protected route - only logged-in users can add habits
+router.post('/', verifyToken, async (req, res, next) => {
   try {
     const { name, plantType } = req.body;
-    const userId = req.user._id;
+    const userId = req.user._id; // Comes from token
 
     const newHabit = new Habit({ name, plantType, userId });
     await newHabit.save();
 
     res.status(201).json(newHabit);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Get all habits for the logged-in user
+router.get('/', verifyToken, async (req, res, next) => {
+  try {
+    const userId = req.user._id;
+    const habits = await Habit.find({ userId }).lean();
+    res.json(habits);
   } catch (err) {
     next(err);
   }

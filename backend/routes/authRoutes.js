@@ -1,10 +1,12 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const router = express.Router();
 
 // Number of salt rounds for bcrypt hashing
+const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
 const SALT_ROUNDS = 10;
 
 router.post('/register', async (req, res, next) => {
@@ -37,7 +39,16 @@ router.post('/login', async (req, res, next) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    res.json({ message: 'Login successful', userId: user._id });
+    // Create jwt
+    const token = jwt.sign({ _id: user._id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
+
+    res.json({
+      message: 'Login successful',
+      token,
+      userId: user._id,
+      name: user.name,
+      email: user.email
+    });
   } catch (err) {
     next(err);
   }

@@ -16,8 +16,8 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "billy@gmail.com",
-  "password": "billy"
+  "email": "andrew@example.com",
+  "password": "password"
 }
 
 
@@ -27,10 +27,11 @@ DELETE http://localhost:5000/api/auth/email/sam@example.com
 ### Create a new habit (you may need to provide userId depending on frontend handling)
 POST http://localhost:5000/api/habits
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODM3NDdjZGU5OTA3Yzc1MjQzNGYzOTgiLCJlbWFpbCI6ImFuZHJld0BleGFtcGxlLmNvbSIsImlhdCI6MTc0OTA1NDE3MywiZXhwIjoxNzQ5NjU4OTczfQ._rreRnJKdhfEJK_B552Mqm-27i2VWiMrUInqm8lOKLQ
 
 {
-  "name": "Exercise",
-  "plantType": "sunflower"
+  "name": "Read Scripture",
+  "plantType": "Bamboo"
 }
 
 ### Mark habit as completed
