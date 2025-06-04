@@ -22,17 +22,18 @@ const allowedOrigins = [
 ]
 app.use(cors({
   origin: function(origin, callback){
-    // Allow requests with no origin (like mobile apps, curl requests)
     if(!origin) return callback(null, true);
-
     if(allowedOrigins.indexOf(origin) === -1){
       const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}`;
       return callback(new Error(msg), false);
     }
     return callback(null, true);
   },
-  credentials: true // if you want to allow cookies/sessions
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
 app.use(express.json());
 
 app.use(session({
@@ -45,6 +46,8 @@ app.use(session({
 
 app.use(flash());
 
+app.options('*', cors());
+
 // ✅ Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/habits', habitRoutes);
@@ -53,8 +56,8 @@ app.get('/', (req, res) => res.send('API Running'));
 
 // Error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Something broke!' });
+  console.error('Error:', err); // print full error object
+  res.status(500).json({ message: err.message || 'Something broke!' });
 });
 
 const PORT = process.env.PORT || 5000;
