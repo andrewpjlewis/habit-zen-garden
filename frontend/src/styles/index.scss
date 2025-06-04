@@ -341,7 +341,6 @@ svg {
   z-index: 10;
   height: 80px;
   background-color: rgb(49, 152, 49);
-  position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -542,6 +541,20 @@ svg {
   color: white;
   padding: 20px;
   border-radius: 20px;
+}
+
+#logout {
+  background-color: transparent;
+  color: black;
+  font-weight: 300px;
+  border-style: none;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 20px;
+  &:hover{
+    background-color: $transparent-black;
+    color: white;
+  }
 }
 
 #registerNotification {
