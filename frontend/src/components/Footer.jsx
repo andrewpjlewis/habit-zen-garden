@@ -60,7 +60,7 @@ function Footer({ onAddClick }) {
             {showSettings && (
             <div ref={settingsRef} className="settings-panel">
                 {/* <button onClick={onHelp}>Help</button> */}
-                <button onClick={handleLogout}>Logout</button>
+                <button id="logout" onClick={handleLogout}>Logout</button>
             </div>
             )}
         </div>
