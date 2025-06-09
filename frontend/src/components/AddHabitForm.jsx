@@ -36,6 +36,7 @@ function AddHabit({ onAddHabit }) {
       body: JSON.stringify({
         name: goalName.trim(),
         plantType: `plant${selectedPlant}`,
+        frequency: frequency.trim(),
       }),
     });
 
