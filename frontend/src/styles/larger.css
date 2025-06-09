@@ -17,7 +17,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 20px;
-    margin-top: 130px;
+    margin-top: 120px;
   }
   .left-image {
     height: 80px;
@@ -25,8 +25,11 @@
   .plant {
     height: 185px;
   }
-  .plant-detail {
+  .plant-detail-container {
     max-width: 770px;
+  }
+  .plant-detail {
+    max-width: 710px;
   }
   .add-habit-form-container {
     max-width: 710px;
