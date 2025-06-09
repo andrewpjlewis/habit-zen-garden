@@ -5,6 +5,7 @@ import Register from './pages/Register'; // import Register page
 import Dashboard from './pages/Dashboard';
 import AddHabit from './pages/AddHabit';
 import Welcome from './pages/Welcome';
+import PlantDetail from './pages/PlantDetail'
 
 import { HabitsProvider } from './context/HabitsContext'; // import the context provider
 
@@ -35,6 +36,7 @@ function App() {
             path="/dashboard/add" 
             element={isLoggedIn ? <AddHabit /> : <Navigate to="/login" />} 
           />
+          <Route path="/plants/:id" element={<PlantDetail />} />
           <Route 
             path="/" 
             element={<Navigate to={isLoggedIn ? "/dashboard" : "/login"} />} 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Plant from '../components/Plant';
+import Plant from '../components/Plant'; // Import the single habit card component
 import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
@@ -11,7 +11,8 @@ function Dashboard() {
   const fetchHabits = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
-      return console.error('No token found. Redirecting to login...');
+      console.error('No token found. Redirecting to login...');
+      return;
     }
 
     try {
@@ -21,9 +22,7 @@ function Dashboard() {
         },
       });
 
-      if (!res.ok) {
-        throw new Error('Failed to fetch habits');
-      }
+      if (!res.ok) throw new Error('Failed to fetch habits');
 
       const data = await res.json();
       setHabits(data);
@@ -46,9 +45,7 @@ function Dashboard() {
       <main>
         <div className="content">
           {habits.length > 0 ? (
-            habits.map((habit) => (
-              <Plant key={habit._id} habit={habit} />
-            ))
+            habits.map((habit) => <Plant key={habit._id} habit={habit} />)
           ) : (
             <p id="contentBlank">No habits found. Add some habits to get started!</p>
           )}

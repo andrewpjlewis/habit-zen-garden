@@ -40,6 +40,19 @@ router.get('/', verifyToken, async (req, res, next) => {
   }
 });
 
+// ✅ Get a single habit by ID for the logged-in user
+router.get('/:id', verifyToken, async (req, res, next) => {
+  try {
+    const habit = await Habit.findOne({ _id: req.params.id, userId: req.user._id }).lean();
+    if (!habit) {
+      return res.status(404).json({ message: 'Habit not found' });
+    }
+    res.json(habit);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // ✅ Mark a habit as complete (increment progress)
 router.patch('/:id/complete', async (req, res, next) => {
   try {
@@ -50,6 +63,18 @@ router.patch('/:id/complete', async (req, res, next) => {
     await habit.save();
 
     res.json(habit);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete('/:id', verifyToken, async (req, res, next) => {
+  try {
+    const habit = await Habit.findOneAndDelete({ _id: req.params.id, userId: req.user._id });
+    if (!habit) {
+      return res.status(404).json({ message: 'Habit not found' });
+    }
+    res.status(200).json({ message: 'Habit deleted' });
   } catch (err) {
     next(err);
   }
