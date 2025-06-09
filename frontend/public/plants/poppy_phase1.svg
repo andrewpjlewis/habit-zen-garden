@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 292.41 394.12">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #5a3723;
+        stroke: #382217;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke-width: 2px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        fill: #995724;
+        stroke: #7a4521;
+      }
+
+      .cls-3 {
+        fill: #4c893f;
+        stroke: #3a5f2d;
+      }
+
+      .cls-4 {
+        fill: #b8d433;
+        stroke: #9ca539;
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <g>
+    <path class="cls-2" d="M18.93,195.48l34.84,180.45c0,9.49,41.79,17.19,93.34,17.19s93.34-7.7,93.34-17.19l32.74-178.64-254.27-1.81Z"/>
+    <ellipse class="cls-2" cx="146.21" cy="153.16" rx="145.21" ry="87.89"/>
+    <ellipse class="cls-1" cx="145.8" cy="144.72" rx="138.53" ry="59.32"/>
+  </g>
+  <g>
+    <path class="cls-3" d="M113.33,52.3s29.64,90.78-2.6,116h5.14s32.4-21.41,2.38-116.38l-4.92.38Z"/>
+    <path class="cls-4" d="M95.21,21.15c0-10.85,8.8-19.65,19.65-19.65s19.65,8.8,19.65,19.65-19.65,35.54-19.65,35.54c0,0-19.65-24.68-19.65-35.54Z"/>
+  </g>
+</svg>
