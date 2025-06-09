@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function PlantDetail() {
   const { id } = useParams();
@@ -61,15 +63,21 @@ function PlantDetail() {
   if (!habit) return <p>No habit found.</p>;
 
   return (
-    <div className="plant-detail">
-      <h2>{habit.name}</h2>
-      <p>Frequency: {habit.frequency}x per week</p>
-      <p>Progress: {habit.progress}</p>
-      <img src={`/plants/${habit.plantType}.png`} alt={`Plant image for ${habit.name}`} />
-      <button onClick={handleDelete} style={{ marginTop: '20px', backgroundColor: 'red', color: 'white' }}>
-        Delete Habit
-      </button>
-    </div>
+    <>
+    <Header />
+    <main>
+        <div className="plant-detail">
+          <h2>{habit.name}</h2>
+          <p>Frequency: {habit.frequency}x per week</p>
+          <p>Progress: {habit.progress}</p>
+          <img src={`/plants/${habit.plantType}.png`} alt={`Plant image for ${habit.name}`} />
+          <button onClick={handleDelete} style={{ marginTop: '20px', backgroundColor: 'red', color: 'white' }}>
+            Delete Habit
+          </button>
+        </div>
+    </main>
+    <Footer />
+    </>
   );
 }
 

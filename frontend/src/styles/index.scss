@@ -24,7 +24,7 @@ a img {
 body {
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -32,6 +32,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 button[type="submit"] {
@@ -95,6 +96,8 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  overflow: hidden;
+  height: 100vh;
 }
 
 label {
@@ -103,7 +106,7 @@ label {
 
 main {
   margin: 0;
-  background-image: url('../images/backround.png');
+  background-image: url('../images/background.png');
 }
 
 svg {
@@ -139,12 +142,13 @@ svg {
 .content {
   flex: 1 1 auto; /* grow and shrink, fill remaining space */
   overflow-y: auto; /* scroll if overflow */
-  padding: 10px;
+  padding: 20px 15px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
   box-sizing: border-box;
   height: 100vh;
+  margin-top: 120px;
 }
 
 .left-image {
@@ -344,8 +348,10 @@ svg {
 
 .top-bar {
   flex: 0 0 80px;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
   height: 80px;
   background-color: rgb(49, 152, 49);
@@ -369,7 +375,7 @@ svg {
   border-radius: 20px;
   padding: 30px;
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
@@ -378,8 +384,11 @@ svg {
   &-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
+    margin-top: 120px;
     padding: 30px;
+    width: 100vw;
+    height: 100vh;
   }
 }
 
@@ -437,17 +446,25 @@ svg {
   color: white;
 }
 
+.plant-detail {
+  flex: 1 1 auto; /* grow and shrink, fill remaining space */
+  overflow-y: auto;
+  width: 100vw;
+  height: 100vh;
+  margin-top: 120px;
+}
+
 .plant-picker {
-  display: flex;             /* horizontal flex container */
-  justify-content: center;   /* center the items horizontally */
-  align-items: center;       /* vertically center the circles */
-  gap: 15px;                 /* space between the circles */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
   margin-bottom: 20px;
-  flex-direction: row;       /* explicitly set horizontal */
+  flex-direction: row;
 
   .center {
-    width: 120px;
-    height: 120px;
+    width: 90px;
+    height: 90px;
     opacity: 1;
     border-color: #9f6a2f; /* primary color */
     transform: translateY(0);
@@ -468,8 +485,8 @@ svg {
   }
 
   .side {
-    width: 90px;
-    height: 90px;
+    width: 75px;
+    height: 75px;
     opacity: 0.5;
     transform: translateY(15px);  /* slightly lower for perspective */
     z-index: 1;

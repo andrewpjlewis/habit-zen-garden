@@ -1,15 +1,17 @@
-@media screen and (min-width: 35em) {  
-  svg {
-    width: 100px;
-    height: 100px;
+@media screen and (min-width: 32.5em) {
+  main {
+    margin: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('../images/background-hd.png');
   }
 
   /*Classes*/
-  
   .bottom-bar{
     bottom: 0;
     width: 100%;
-    max-width: 508.34px;
+    max-width: 770px;
   }
 
   .content {
@@ -17,6 +19,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 20px;
+    margin-top: 130px;
   }
   
   .left-image {
@@ -27,8 +30,18 @@
     height: 185px;
   }
 
+  .plant-detail {
+    max-width: 770px;
+  }
+
+  .add-habit-form-container {
+    max-width: 710px;
+  }
+
   .top-bar {
-    height: 90px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 770px;
   }
 }
 
@@ -37,14 +50,6 @@
     background-size: cover;
   }
 
-  .top-bar {
-    height: 130px;
-  }
-
-  svg {
-    width: 120px;
-    height: 120px;
-  }
   .bottom-bar{
     bottom: 0;
     width: 100%;
