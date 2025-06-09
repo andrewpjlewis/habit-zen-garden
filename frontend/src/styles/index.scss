@@ -145,6 +145,7 @@ svg {
   padding: 20px 15px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr 1fr;
   gap: 15px;
   box-sizing: border-box;
   height: 100vh;
@@ -668,4 +669,11 @@ svg {
     border-radius: 10px;
     padding: 10px;
     z-index: 100;
+
+    button{
+      font-size: 18px;
+      border-style: none;
+      background: white;
+      padding: 10px;
+    }
 }

@@ -16,7 +16,6 @@
 
   .content {
     max-width: 770px;
-    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 20px;
     margin-top: 120px;
@@ -40,6 +39,16 @@
 
   .add-habit-form-container {
     max-width: 710px;
+  }
+
+  .settings-panel{
+    button{
+      &:hover{
+        background-color: rgb(78, 78, 78);
+        color: white;
+        border-radius: 5px;
+      }
+    }
   }
 
   .top-bar {
@@ -66,7 +75,6 @@
   .content {
     max-width: 770px;
     grid-template-columns: 225px 225px 225px;
-    grid-template-rows: 1fr 1fr 1fr;
     gap: 30px;
   }
 
