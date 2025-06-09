@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 
 function Plant({ habit }) {
   return (
-    <Link to={`/plants/${habit._id}`} className='plant'>
+    <Link to={`/plants/${habit._id}`} className="plant">
       <p>{habit.frequency}x per week</p>
       <h3>{habit.name}</h3>
-      {/* Use template literals for img src */}
-      <img src={`/plants/${habit.plantType}.png`} alt={`Plant image for ${habit.name}`} />
+      {/* Always load phase 1 of the selected plantType */}
+      <img
+        src={`/plants/${habit.plantType}_phase1.svg`}
+        alt={`Plant image for ${habit.name}`}
+      />
     </Link>
   );
 }

@@ -238,6 +238,9 @@ svg {
 .plant:hover {
   background-color: rgba(0, 0, 0, 0.9);
 }
+.plant img {
+  height: 80px;
+}
 
 .register-container {
   background-image: url("../images/Wooden Signboard with Natural Grain.png");
@@ -490,6 +493,9 @@ svg {
   opacity: 0.5;
   transform: translateY(15px); /* slightly lower for perspective */
   z-index: 1;
+}
+.plant-picker img {
+  height: 90px;
 }
 
 .welcomeMessage {
