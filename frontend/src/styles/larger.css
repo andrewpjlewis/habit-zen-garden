@@ -13,13 +13,19 @@
     max-width: 770px;
   }
   .content {
-    max-width: 770px;
+    min-width: 770px;
+    max-height: 525px;
     gap: 20px;
     padding: 20px;
-    margin-top: 120px;
+  }
+  .delete-button:hover {
+    background-color: lightcoral;
+    color: darkred;
+    font-weight: 700;
   }
   .left-image {
     height: 80px;
+    bottom: 10px;
   }
   .plant {
     height: 185px;
@@ -43,6 +49,10 @@
     width: 100%;
     max-width: 770px;
   }
+  .watering-can-button:hover {
+    background-color: rgb(32, 40, 17);
+    color: white;
+  }
 }
 @media screen and (min-width: 80em) {
   body {
@@ -59,7 +69,7 @@
   .content {
     max-width: 770px;
     grid-template-columns: 225px 225px 225px;
-    gap: 30px;
+    /*gap: 30px;*/
   }
   /* Reapply plant grid placement if needed */
   #plant1 {

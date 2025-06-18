@@ -47,7 +47,7 @@ function Profile() {
   if (loading) return <p>Loading profile...</p>;
 
   if (!user) {
-    return <p style={{ color: 'red' }}>No user info available. Please make sure you're logged in.</p>;
+    return <p class="noUser">No user info available. Please make sure you're logged in.</p>;
   }
 
   // Format joined date safely
