@@ -132,6 +132,15 @@ main {
   margin-top: 90px;
 }
 
+.delete-account-button {
+  background-color: #eca554;
+  color: #4f3517;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  font-size: 16px;
+}
+
 .left-image {
   height: 60px;
   width: 60px;
@@ -245,6 +254,21 @@ main {
 .profileImage {
   height: 80px;
   width: 80px;
+}
+
+.profile-container {
+  min-width: 395px;
+  min-height: 750px;
+  margin-top: 90px;
+  padding: 20px;
+}
+
+.profile-info {
+  background-color: rgb(52, 37, 29);
+  padding: 20px;
+  border-radius: 20px;
+  color: white;
+  font-size: 16px;
 }
 
 .plant-image {
