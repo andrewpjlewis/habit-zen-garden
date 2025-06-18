@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');  // same as username in Login
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ function Register() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, email, password })
+        body: JSON.stringify({ firstname, lastname, email, password })
       });
 
       const data = await res.json();
@@ -44,11 +45,22 @@ function Register() {
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Name:</label><br />
+          <label>First Name:</label><br />
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={firstname}
+            onChange={(e) => setFirstname(e.target.value)}
+            required
+            disabled={loading}
+          />
+        </div>
+
+        <div>
+          <label>Last Name:</label><br />
+          <input
+            type="text"
+            value={lastname}
+            onChange={(e) => setLastname(e.target.value)}
             required
             disabled={loading}
           />
@@ -80,6 +92,7 @@ function Register() {
           {loading ? 'Registering...' : 'Register'}
         </button>
       </form>
+
       <p id="registerNotification">
         Already have an account?{' '}
         <button
@@ -87,9 +100,7 @@ function Register() {
           onClick={() => navigate('/login')}
           className="link-button"
           disabled={loading}
-          style={{
-            cursor: loading ? 'not-allowed' : 'pointer'
-          }}
+          style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
         >
           Log in here
         </button>

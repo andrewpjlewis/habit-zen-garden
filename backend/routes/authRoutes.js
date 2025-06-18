@@ -12,11 +12,23 @@ const SALT_ROUNDS = 10;
 
 router.post('/register', async (req, res, next) => {
   try {
-    const { email, name, password } = req.body;
-    const existingUser = await User.findOne({ email }).lean();
-    if (existingUser) return res.status(400).json({ message: 'User already exists' });
+    const { firstname, lastname, email, password } = req.body;
 
-    const newUser = new User({ name, email, password });
+    // Check if user already exists
+    const existingUser = await User.findOne({ email }).lean();
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+
+    const newUser = new User({
+      firstname,
+      lastname,
+      email,
+      password: hashedPassword
+    });
+
     await newUser.save();
 
     res.status(201).json({ message: 'User registered successfully' });

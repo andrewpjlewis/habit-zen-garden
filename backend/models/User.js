@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-  firstname: { type: String, required: true },  // added first name
-  lastname: { type: String, required: true },   // added last name
+  firstname: { type: String, required: true },
+  lastname: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }
 }, { timestamps: true }); // adds createdAt and updatedAt automatically
