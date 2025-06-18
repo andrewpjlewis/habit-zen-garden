@@ -18,6 +18,11 @@
     gap: 20px;
     padding: 20px;
   }
+  .profile-container {
+    min-width: 770px;
+    min-height: 525px;
+    gap: 20px;
+  }
   .delete-button:hover {
     background-color: lightcoral;
     color: darkred;
