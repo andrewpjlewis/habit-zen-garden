@@ -94,8 +94,23 @@ function PlantDetail() {
               alt={`Plant image for ${habit.name}`}
               className="plant-image"
             />
+            
+            {/* Progress Bar For Level Up*/}
+            <div className="progress-bar-container" style={{ width: '100%', background: '#eee', borderRadius: 10, height: 20, marginBottom: 10 }}>
+              <div
+                style={{
+                  width: `${habit.progress}%`,
+                  backgroundColor: '#4caf50',
+                  height: '100%',
+                  borderRadius: 10,
+                  transition: 'width 0.5s ease-in-out',
+                }}
+              />
+            </div>
+
             <p>Progress: {habit.progress} / {habit.frequency}</p>
             <p>Frequency: {habit.frequency}x per week</p>
+            <p>Streak: {habit.streak} week{habit.streak !== 1 ? 's' : ''} in a row</p>
 
             <button
               className="delete-button"
