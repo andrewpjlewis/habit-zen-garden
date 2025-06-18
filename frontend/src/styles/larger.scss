@@ -21,9 +21,16 @@
     padding: 20px;
   }
 
-  .profile-container {
-    min-width: 770px;
-    min-height: 525px;
+  .delete-account-button{
+    &:hover{
+      background-color: lightcoral;
+      color: darkred;
+    }
+  }
+
+  .profile-container{
+    min-width: 730px;
+    min-height: 550px;
     gap: 20px;
   }
 
