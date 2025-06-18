@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function Login() {
-  const [username, setUsername] = useState(''); // email
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -17,7 +17,7 @@ function Login() {
       const res = await fetch('https://habit-zen-garden.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: username.trim(), password }),
+        body: JSON.stringify({ email: email.trim(), password }),
       });
 
       const text = await res.text();
@@ -40,11 +40,17 @@ function Login() {
 
       console.log('✅ Login successful:', data);
 
+      // Clear cached habits
       localStorage.removeItem('habitData');
       localStorage.removeItem('habitData_at');
 
-      // Pass userId and token to AuthContext login
-      login({ userId: data.userId, token: data.token });
+      // Pass user data to AuthContext
+      login({
+        userId: data.userId,
+        token: data.token,
+        firstname: data.firstname,
+        lastname: data.lastname,
+      });
 
       navigate('/welcome');
     } catch (error) {
@@ -63,8 +69,9 @@ function Login() {
           <label>Email:</label><br />
           <input
             type="email"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
             required
             disabled={loading}
           />
@@ -76,6 +83,7 @@ function Login() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
             required
             disabled={loading}
           />
@@ -85,6 +93,7 @@ function Login() {
           {loading ? 'Logging in...' : 'Log In'}
         </button>
       </form>
+
       <p id="registerNotification">
         Don't have an account?{' '}
         <button
