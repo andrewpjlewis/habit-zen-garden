@@ -2,49 +2,40 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useCachedFetch } from '../utils/useCachedFetch';
 
 function PlantDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [habit, setHabit] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem('token');
+
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const { data: habit, loading } = useCachedFetch(
+    `https://habit-zen-garden.onrender.com/api/habits/${id}`,
+    `habit_${id}`,
+    10,
+    options
+  );
+
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchHabit = async () => {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        setError('You must be logged in to view this habit.');
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const res = await fetch(`https://habit-zen-garden.onrender.com/api/habits/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!res.ok) throw new Error('Failed to fetch habit');
-
-        const data = await res.json();
-        setHabit(data);
-      } catch (err) {
-        setError(err.message || 'Error fetching habit');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHabit();
-  }, [id]);
+    if (!token) {
+      setError('You must be logged in to view this habit.');
+    } else {
+      setError('');
+    }
+  }, [token]);
 
   const handleDelete = async () => {
     if (!window.confirm('Are you sure you want to delete this habit?')) return;
 
     try {
-      const token = localStorage.getItem('token');
       const res = await fetch(`https://habit-zen-garden.onrender.com/api/habits/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
@@ -60,7 +51,6 @@ function PlantDetail() {
 
   const handleComplete = async () => {
     try {
-      const token = localStorage.getItem('token');
       const res = await fetch(`https://habit-zen-garden.onrender.com/api/habits/${id}/complete`, {
         method: 'PATCH',
         headers: {
@@ -72,7 +62,11 @@ function PlantDetail() {
       if (!res.ok) throw new Error('Failed to complete habit');
 
       const updatedHabit = await res.json();
-      setHabit(updatedHabit);
+
+      localStorage.setItem(`habit_${id}`, JSON.stringify(updatedHabit));
+      localStorage.setItem(`habit_${id}_at`, Date.now());
+
+      window.location.reload();
     } catch (err) {
       alert(err.message || 'Error completing habit');
     }

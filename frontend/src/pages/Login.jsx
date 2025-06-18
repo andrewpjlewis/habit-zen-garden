@@ -38,7 +38,10 @@ function Login() {
         return;
       }
 
-      console.log('✅ Login successful:', data);
+      // console.log('✅ Login successful:', data);
+
+      localStorage.removeItem('habitData');
+      localStorage.removeItem('habitData_at');
 
       // Pass userId and token to AuthContext login
       login({ userId: data.userId, token: data.token });
