@@ -65,6 +65,7 @@ function Profile() {
       <main>
         <div className="profile-container">
           <h2>My Profile</h2>
+          <div className="profile-info">
           <p><strong>Name:</strong> {user.firstname} {user.lastname}</p>
           <p><strong>Email:</strong> {user.email}</p>
           <p><strong>Joined:</strong> {joinedDate}</p>
@@ -75,6 +76,7 @@ function Profile() {
           >
             Delete Account
           </button>
+          </div>
         </div>
       </main>
       <Footer />
