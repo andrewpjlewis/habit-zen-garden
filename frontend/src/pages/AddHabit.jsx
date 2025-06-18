@@ -11,6 +11,8 @@ function AddHabit() {
 
   const handleAddHabit = (newHabit) => {
     addHabit(newHabit);
+    localStorage.removeItem('habitData');
+    localStorage.removeItem('habitData_at');
     navigate('/dashboard'); // go back to dashboard after adding
   };
 

@@ -1,13 +1,14 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import Login from './pages/Login';
-import Register from './pages/Register'; // import Register page
+import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import AddHabit from './pages/AddHabit';
 import Welcome from './pages/Welcome';
-import PlantDetail from './pages/PlantDetail'
+import PlantDetail from './pages/PlantDetail';
+import Profile from './pages/Profile';
 
-import { HabitsProvider } from './context/HabitsContext'; // import the context provider
+import { HabitsProvider } from './context/HabitsContext';
 
 function App() {
   const { isLoggedIn } = useAuth();
@@ -40,6 +41,10 @@ function App() {
           <Route 
             path="/" 
             element={<Navigate to={isLoggedIn ? "/dashboard" : "/login"} />} 
+          />
+          <Route 
+            path="/profile" 
+            element={isLoggedIn ? <Profile /> : <Navigate to="/login" />} 
           />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

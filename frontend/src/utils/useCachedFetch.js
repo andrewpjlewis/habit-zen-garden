@@ -5,15 +5,30 @@ export function useCachedFetch(url, cacheKey, cacheMinutes = 10, options = {}) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    const headers = {
+      "Content-Type": "application/json",
+      ...options.headers,
+    };
+
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
     const cached = localStorage.getItem(cacheKey);
     const cachedAt = localStorage.getItem(`${cacheKey}_at`);
-    const isFresh = cached && cachedAt && (Date.now() - Number(cachedAt) < cacheMinutes * 60 * 1000);
+    const isFresh =
+      cached && cachedAt &&
+      (Date.now() - Number(cachedAt) < cacheMinutes * 60 * 1000);
 
     if (isFresh) {
       setData(JSON.parse(cached));
       setLoading(false);
     } else {
-      fetch(url, options)
+      fetch(url, {
+        ...options,
+        headers,
+      })
         .then(async (res) => {
           if (!res.ok) {
             const errText = await res.text();

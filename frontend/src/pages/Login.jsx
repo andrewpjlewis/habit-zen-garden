@@ -38,7 +38,7 @@ function Login() {
         return;
       }
 
-      // console.log('✅ Login successful:', data);
+      console.log('✅ Login successful:', data);
 
       localStorage.removeItem('habitData');
       localStorage.removeItem('habitData_at');
