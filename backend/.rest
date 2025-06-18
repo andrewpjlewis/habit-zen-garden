@@ -1,65 +1,66 @@
-### Get all users
-GET http://localhost:5000/api/auth/all
-
-### Register a new user
+### Register new user
 POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-  "name": "Billy",
-  "email": "billy@gmail.com",
-  "password": "billy"
+  "name": "Andrew Lewis",
+  "email": "andrew@example.com",
+  "password": "password123"
 }
+
+###
 
 ### Login user
 POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "andrew@example.com",
-  "password": "password"
+  "email": "sam@example.com",
+  "password": "123456"
 }
-
-
-### Delete user by email
-DELETE http://localhost:5000/api/auth/email/sam@example.com
-
-### Create a new habit (you may need to provide userId depending on frontend handling)
-POST http://localhost:5000/api/habits
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODM3NDdjZGU5OTA3Yzc1MjQzNGYzOTgiLCJlbWFpbCI6ImFuZHJld0BleGFtcGxlLmNvbSIsImlhdCI6MTc0OTA1NDE3MywiZXhwIjoxNzQ5NjU4OTczfQ._rreRnJKdhfEJK_B552Mqm-27i2VWiMrUInqm8lOKLQ
-
-{
-  "name": "Read Scripture",
-  "plantType": "Bamboo"
-}
-
-### Mark habit as completed
-PATCH http://localhost:5000/api/habits/<habitId>/complete
-
 
 ###
-### Register User
-POST https://habit-zen-garden.onrender.com/api/auth/register
+
+# Copy the token from the login response and paste it below as Authorization header value
+
+### Get current user profile
+GET http://localhost:5000/api/auth/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODQwYWExZWQ2OGZhMTEzYjY4ZGNkZGYiLCJlbWFpbCI6InNhbUBleGFtcGxlLmNvbSIsImlhdCI6MTc1MDI2NjM4NSwiZXhwIjoxNzUwMjY5OTg1fQ.qxPB5JiKeHYWeZlpL6qI0zEaQnGqv9HCPhzBioaZ_LY
+
+###
+
+### Delete current user profile
+DELETE http://localhost:5000/api/auth/profile
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+###
+
+### Get all users (no auth required in your current setup)
+GET http://localhost:5000/api/auth/all
+
+###
+
+### Delete user by email (use with caution, no auth in current setup)
+DELETE http://localhost:5000/api/auth/email/andrew@example.com
+
+###
+
+### Create a new habit (protected)
+POST http://localhost:5000/api/habits
 Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
 
 {
-  "name": "Sam",
-  "email": "sam@example.com",
-  "password": "123456"
+  "name": "Morning Meditation",
+  "plantType": "Succulent",
+  "frequency": 3
 }
 
-### Login User
-POST https://habit-zen-garden.onrender.com/api/auth/login
-Content-Type: application/json
+###
 
-{
-  "email": "sam@example.com",
-  "password": "123456"
-}
+### Get all habits for logged in user
+GET http://localhost:5000/api/habits
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
 
-### Get All Users
-GET https://habit-zen-garden.onrender.com/api/auth/all
+###
 
-### Delete User by Email
-DELETE https://habit-zen-garden.onrender.com/api/auth/email/sam@example.com
