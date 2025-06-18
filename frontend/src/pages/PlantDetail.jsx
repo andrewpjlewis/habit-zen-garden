@@ -141,7 +141,6 @@ function PlantDetail() {
               </button>
             </div>
           </div>
-        </div>
       </main>
       <Footer />
     </>
