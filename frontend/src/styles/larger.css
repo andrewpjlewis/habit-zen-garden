@@ -13,7 +13,7 @@
     max-width: 770px;
   }
   .content {
-    max-width: 770px;
+    min-width: 770px;
     max-height: 525px;
     gap: 20px;
     padding: 20px;
