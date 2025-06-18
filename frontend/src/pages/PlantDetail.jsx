@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useCachedFetch } from '../utils/useCachedFetch';
+import { getPlantStage } from '../utils/plantGrowth';
 
 function PlantDetail() {
   const { id } = useParams();
@@ -73,10 +74,13 @@ function PlantDetail() {
   };
 
   if (loading) return <p>Loading habit...</p>;
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
+  if (error) return <p>{error}</p>;
   if (!habit) return <p>No habit found.</p>;
 
-  const isMaxed = habit.progress >= habit.frequency;
+  const isMaxed = habit.progress >= 100;
+
+  const stage = getPlantStage(habit.level);
+  const plantImgSrc = `/plants/${habit.plantType}_${stage}.svg`
 
   return (
     <>
@@ -86,7 +90,7 @@ function PlantDetail() {
           <div className="plant-detail">
             <h2>{habit.name}</h2>
             <img
-              src={`/plants/${habit.plantType}_phase1.svg`}
+              src={plantImgSrc}
               alt={`Plant image for ${habit.name}`}
               className="plant-image"
             />
