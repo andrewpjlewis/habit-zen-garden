@@ -247,6 +247,10 @@ main {
   width: 80px;
 }
 
+.plant-image {
+  height: 80px;
+}
+
 .register-container {
   background-image: url("../images/Wooden Signboard with Natural Grain.png");
   background-repeat: no-repeat;

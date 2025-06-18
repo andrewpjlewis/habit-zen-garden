@@ -86,7 +86,7 @@ function PlantDetail() {
           <div className="plant-detail">
             <h2>{habit.name}</h2>
             <img
-              src={`/plants/${habit.plantType}.png`}
+              src={`/plants/${habit.plantType}_phase1.svg`}
               alt={`Plant image for ${habit.name}`}
               className="plant-image"
             />
