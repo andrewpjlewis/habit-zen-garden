@@ -94,11 +94,6 @@ main {
   background-image: url("../images/background.png");
 }
 
-svg {
-  width: 80px;
-  height: 80px;
-}
-
 /* --- Layout --- */
 .bottom-bar {
   flex: 0 0 130px;
@@ -115,6 +110,10 @@ svg {
   justify-content: space-evenly;
   align-items: center;
 }
+.bottom-bar > svg {
+  height: 50px;
+  width: 50px;
+}
 .bottom-icon {
   height: 60px;
   width: auto;
@@ -126,19 +125,19 @@ svg {
   padding: 20px 15px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: repeat(3, 200px);
   gap: 15px;
   box-sizing: border-box;
   height: 100vh;
-  margin-top: 120px;
+  margin-top: 90px;
 }
 
 .left-image {
-  height: 50px;
-  width: auto;
+  height: 60px;
+  width: 60px;
   position: absolute;
-  left: 1rem;
-  bottom: 10px;
+  left: 2rem;
+  bottom: 15px;
 }
 
 .link-button {
@@ -243,6 +242,11 @@ svg {
   height: 80px;
 }
 
+.profileImage {
+  height: 80px;
+  width: 80px;
+}
+
 .register-container {
   background-image: url("../images/Wooden Signboard with Natural Grain.png");
   background-repeat: no-repeat;
@@ -320,12 +324,12 @@ svg {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-top: 2rem;
-  padding-bottom: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 .top-bar > svg:not(.left-image) {
   height: 100px;
-  width: auto;
+  width: 100;
   margin: 0 auto;
 }
 
@@ -400,12 +404,20 @@ svg {
   color: white;
 }
 
+.noUser {
+  background-color: rgb(123, 17, 17);
+  color: white;
+  margin-top: 25px;
+  padding: 10px;
+  border-radius: 15px;
+}
+
 .plant-detail-container {
   flex: 1 1 auto; /* grow and shrink, fill remaining space */
   overflow-y: auto;
   width: 100vw;
   height: 100vh;
-  margin-top: 120px;
+  margin-top: 90px;
   display: flex;
   align-items: start;
   justify-content: center;
@@ -426,6 +438,7 @@ svg {
 }
 
 .delete-button {
+  grid-column: 1/1;
   background-color: red;
   color: white;
   padding: 0.5rem 1rem;
@@ -433,14 +446,22 @@ svg {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  font-size: 14px;
+}
+
+.frequency {
+  background-color: rgb(46, 45, 45);
+  padding: 10px;
+  border-radius: 25px;
 }
 
 .watering-can-button {
+  grid-column: 3/3;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: #4CAF50;
-  color: white;
+  background-color: #8dc78f;
+  color: rgb(46, 57, 26);
   padding: 0.6rem 1rem;
   margin-top: 1rem;
   border: none;
@@ -552,8 +573,21 @@ svg {
   transform: scale(1.05);
 }
 .add-plant-button svg {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
+}
+
+.buttonGroup {
+  display: grid;
+  grid-template-columns: 1fr 20px 1fr;
+}
+
+.progressBar {
+  background-color: rgb(140, 225, 143);
+  color: black;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 16px;
 }
 
 /*Id's */
