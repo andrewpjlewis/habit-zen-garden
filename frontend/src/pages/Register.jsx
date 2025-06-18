@@ -16,9 +16,7 @@ function Register() {
     try {
       const res = await fetch('https://habit-zen-garden.onrender.com/api/auth/register', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ firstname, lastname, email, password })
       });
 
@@ -93,14 +91,11 @@ function Register() {
         </button>
       </form>
 
-      <p id="registerNotification">
+      <p>
         Already have an account?{' '}
         <button
-          id="registerButton"
           onClick={() => navigate('/login')}
-          className="link-button"
           disabled={loading}
-          style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
         >
           Log in here
         </button>

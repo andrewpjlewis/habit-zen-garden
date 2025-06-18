@@ -3,9 +3,10 @@ POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-  "name": "Andrew Lewis",
+  "firstname": "Andrew",
+  "lastname": "Lewis",
   "email": "andrew@example.com",
-  "password": "password123"
+  "password": "password"
 }
 
 ###
@@ -15,13 +16,11 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "sam@example.com",
-  "password": "123456"
+  "email": "andrew@example.com",
+  "password": "password"
 }
 
 ###
-
-# Copy the token from the login response and paste it below as Authorization header value
 
 ### Get current user profile
 GET http://localhost:5000/api/auth/profile
@@ -41,7 +40,7 @@ GET http://localhost:5000/api/auth/all
 ###
 
 ### Delete user by email (use with caution, no auth in current setup)
-DELETE http://localhost:5000/api/auth/email/andrew@example.com
+DELETE http://localhost:5000/api/auth/email/lewiand1234@gmail.com
 
 ###
 

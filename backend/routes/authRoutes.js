@@ -5,28 +5,23 @@ const User = require('../models/User');
 const verifyToken = require('../middleware/verifyToken');
 
 const router = express.Router();
-
-// Number of salt rounds for bcrypt hashing
 const JWT_SECRET = process.env.JWT_SECRET;
-const SALT_ROUNDS = 10;
 
+// POST /register
 router.post('/register', async (req, res, next) => {
   try {
     const { firstname, lastname, email, password } = req.body;
 
-    // Check if user already exists
-    const existingUser = await User.findOne({ email }).lean();
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
     }
-
-    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
     const newUser = new User({
       firstname,
       lastname,
       email,
-      password: hashedPassword
+      password
     });
 
     await newUser.save();
@@ -37,23 +32,26 @@ router.post('/register', async (req, res, next) => {
   }
 });
 
+// POST /login
 router.post('/login', async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email });
 
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    // Compare plain password with hashed password stored
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    // Create jwt
-    const token = jwt.sign({ _id: user._id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign(
+      { _id: user._id, email: user.email },
+      JWT_SECRET,
+      { expiresIn: '1h' }
+    );
 
     res.json({
       message: 'Login successful',

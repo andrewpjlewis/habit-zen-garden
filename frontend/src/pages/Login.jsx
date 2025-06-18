@@ -44,7 +44,7 @@ function Login() {
       localStorage.removeItem('habitData');
       localStorage.removeItem('habitData_at');
 
-      // Pass user data to AuthContext
+      // Save user data
       login({
         userId: data.userId,
         token: data.token,
@@ -94,11 +94,10 @@ function Login() {
         </button>
       </form>
 
-      <p id="registerNotification">
+      <p>
         Don't have an account?{' '}
         <button
           onClick={() => navigate('/register')}
-          id="registerButton"
           disabled={loading}
         >
           Register here
