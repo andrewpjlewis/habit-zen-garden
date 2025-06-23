@@ -6,7 +6,7 @@ const habitSchema = new mongoose.Schema({
   plantType: { type: String, required: true },
   frequency: { type: Number, default: 1 }, // times per week
   streak: { type: Number, default: 0 }, // full weeks where user hit goal
-  level: { type: Number, default: 0 },
+  level: { type: Number, default: 1 },
   experience: { type: Number, default: 0 },
   completions: { type: [Date], default: [] }, // timestamps of completions
   lastWeekStart: { type: Date, default: null }, // when we started tracking this week

@@ -22,7 +22,7 @@ router.post('/', verifyToken, async (req, res, next) => {
       userId,
       lastLoggedDate: null,
       streak: 0,
-      level: 0,
+      level: 1,
       completions: [],
       lastWeekStart: new Date(new Date().setDate(new Date().getDate() - new Date().getDay())) // Sunday of current week
     });
@@ -97,9 +97,9 @@ router.patch('/:id/complete', verifyToken, async (req, res, next) => {
 
     // 🔥 Experience and level-up logic
     if (typeof habit.experience !== 'number') habit.experience = 0;
-    habit.experience += 7;
+    habit.experience += 5;
 
-    if (habit.experience >= 7) {
+    if (habit.experience >= 5) {
       habit.level += 1;
       habit.experience = 0;
     }
