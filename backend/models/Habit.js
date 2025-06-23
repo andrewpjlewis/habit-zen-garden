@@ -5,7 +5,6 @@ const habitSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   plantType: { type: String, required: true },
   frequency: { type: Number, default: 1 }, // times per week
-  progress: { type: Number, default: 0 }, // progress % toward goal
   streak: { type: Number, default: 0 }, // full weeks where user hit goal
   level: { type: Number, default: 0 },
   experience: { type: Number, default: 0 },

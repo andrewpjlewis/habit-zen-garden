@@ -22,7 +22,6 @@ router.post('/', verifyToken, async (req, res, next) => {
       userId,
       lastLoggedDate: null,
       streak: 0,
-      progress: 0,
       level: 0,
       completions: [],
       lastWeekStart: new Date(new Date().setDate(new Date().getDate() - new Date().getDay())) // Sunday of current week
@@ -78,14 +77,11 @@ router.patch('/:id/complete', verifyToken, async (req, res, next) => {
 
       if (completionsLastWeek >= frequency) {
         habit.streak += 1;
-        habit.progress = 100;
       } else if (completionsLastWeek > 0 && completionsLastWeek < frequency) {
         habit.streak = Math.max(habit.streak - 1, 0);
-        habit.progress = Math.max(habit.progress - 20, 0);
       } else {
         habit.streak = 0;
         habit.level = Math.max(habit.level - 1, 0);
-        habit.progress = 0;
       }
 
       habit.completions = [];
@@ -101,16 +97,14 @@ router.patch('/:id/complete', verifyToken, async (req, res, next) => {
 
     // 🔥 Experience and level-up logic
     if (typeof habit.experience !== 'number') habit.experience = 0;
-    habit.experience += 1;
+    habit.experience += 7;
 
-    if (habit.experience >= 10) {
+    if (habit.experience >= 7) {
       habit.level += 1;
       habit.experience = 0;
     }
 
     habit.completions.push(today);
-    const completedThisWeek = habit.completions.length;
-    habit.progress = Math.min((completedThisWeek / habit.frequency) * 100, 100);
 
     await habit.save();
     res.json(habit);
