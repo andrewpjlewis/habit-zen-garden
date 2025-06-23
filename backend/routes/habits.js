@@ -68,38 +68,30 @@ router.patch('/:id/complete', verifyToken, async (req, res, next) => {
     const today = new Date();
     const todayStr = today.toDateString();
 
-    // Calculate start of current week (Sunday)
     const startOfWeek = new Date(today);
-    startOfWeek.setHours(0,0,0,0);
+    startOfWeek.setHours(0, 0, 0, 0);
     startOfWeek.setDate(today.getDate() - today.getDay());
 
-    // Check if we moved to a new week and apply decay based on last week's completions
     if (habit.lastWeekStart && new Date(habit.lastWeekStart) < startOfWeek) {
       const completionsLastWeek = habit.completions.length;
       const frequency = habit.frequency || 1;
 
       if (completionsLastWeek >= frequency) {
-        // 1. No decay: user met or exceeded weekly goal
         habit.streak += 1;
-        habit.level += 1;
         habit.progress = 100;
       } else if (completionsLastWeek > 0 && completionsLastWeek < frequency) {
-        // 2. Mild decay: partial completions last week
         habit.streak = Math.max(habit.streak - 1, 0);
-        habit.progress = Math.max(habit.progress - 20, 0);  // decrease progress by 20%
+        habit.progress = Math.max(habit.progress - 20, 0);
       } else {
-        // 3. Severe decay: no completions last week
         habit.streak = 0;
-        habit.level = Math.max(habit.level - 1, 0);          // drop level by 1 but never below 0
+        habit.level = Math.max(habit.level - 1, 0);
         habit.progress = 0;
       }
 
-      // Reset completions array and update lastWeekStart to current week start
       habit.completions = [];
       habit.lastWeekStart = startOfWeek;
     }
 
-    // Prevent double-logging for today
     const alreadyLoggedToday = habit.completions.some(
       (date) => new Date(date).toDateString() === todayStr
     );
@@ -107,10 +99,16 @@ router.patch('/:id/complete', verifyToken, async (req, res, next) => {
       return res.status(400).json({ message: 'Habit already logged today' });
     }
 
-    // Log today's completion
-    habit.completions.push(today);
+    // 🔥 Experience and level-up logic
+    if (typeof habit.experience !== 'number') habit.experience = 0;
+    habit.experience += 1;
 
-    // Update progress for current week
+    if (habit.experience >= 10) {
+      habit.level += 1;
+      habit.experience = 0;
+    }
+
+    habit.completions.push(today);
     const completedThisWeek = habit.completions.length;
     habit.progress = Math.min((completedThisWeek / habit.frequency) * 100, 100);
 

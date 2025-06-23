@@ -8,6 +8,7 @@ const habitSchema = new mongoose.Schema({
   progress: { type: Number, default: 0 }, // progress % toward goal
   streak: { type: Number, default: 0 }, // full weeks where user hit goal
   level: { type: Number, default: 0 },
+  experience: { type: Number, default: 0 },
   completions: { type: [Date], default: [] }, // timestamps of completions
   lastWeekStart: { type: Date, default: null }, // when we started tracking this week
   createdAt: { type: Date, default: Date.now },
