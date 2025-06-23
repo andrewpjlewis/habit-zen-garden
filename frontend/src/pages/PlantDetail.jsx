@@ -16,14 +16,18 @@ function PlantDetail() {
     },
   };
 
-  const { data: habit, loading } = useCachedFetch(
+  const { data, loading } = useCachedFetch(
     `https://habit-zen-garden.onrender.com/api/habits/${id}`,
     `habit_${id}`,
-    10,
+    7,
     options
   );
 
+  const [habitState, setHabitState] = useState(null);
   const [error, setError] = useState('');
+  const [leveledUp, setLeveledUp] = useState(false);
+
+  const habit = habitState || data;
 
   useEffect(() => {
     if (!token) {
@@ -43,6 +47,9 @@ function PlantDetail() {
       });
 
       if (!res.ok) throw new Error('Failed to delete habit');
+
+      localStorage.removeItem('habitData');
+      localStorage.removeItem('habitData_at');
 
       navigate('/dashboard');
     } catch (err) {
@@ -64,10 +71,16 @@ function PlantDetail() {
 
       const updatedHabit = await res.json();
 
+      const oldHabit = JSON.parse(localStorage.getItem(`habit_${id}`));
+      if (oldHabit && updatedHabit.level > oldHabit.level) {
+        setLeveledUp(true);
+        setTimeout(() => setLeveledUp(false), 3000);
+      }
+
       localStorage.setItem(`habit_${id}`, JSON.stringify(updatedHabit));
       localStorage.setItem(`habit_${id}_at`, Date.now());
 
-      window.location.reload();
+      setHabitState(updatedHabit);
     } catch (err) {
       alert(err.message || 'Error completing habit');
     }
@@ -77,10 +90,9 @@ function PlantDetail() {
   if (error) return <p>{error}</p>;
   if (!habit) return <p>No habit found.</p>;
 
-  const isMaxed = habit.progress >= 100;
-
+  const isMaxed = habit.experience >= 7;
   const stage = getPlantStage(habit.level);
-  const plantImgSrc = `/plants/${habit.plantType}_${stage}.svg`
+  const plantImgSrc = `/plants/${habit.plantType}_${stage}.svg`;
 
   return (
     <>
@@ -94,12 +106,26 @@ function PlantDetail() {
               alt={`Plant image for ${habit.name}`}
               className="plant-image"
             />
-            
-            {/* Progress Bar For Level Up*/}
-            <div className="progress-bar-container" style={{ width: '100%', background: '#eee', borderRadius: 10, height: 20, marginBottom: 10 }}>
+
+            {leveledUp && (
+              <div className="level-up-animation">
+                🌟 Your plant leveled up! 🌟
+              </div>
+            )}
+
+            <div
+              className="progress-bar-container"
+              style={{
+                width: '100%',
+                background: '#eee',
+                borderRadius: 10,
+                height: 20,
+                marginBottom: 10,
+              }}
+            >
               <div
                 style={{
-                  width: `${habit.progress}%`,
+                  width: `${(habit.experience / 7) * 100}%`,
                   backgroundColor: '#4caf50',
                   height: '100%',
                   borderRadius: 10,
@@ -108,39 +134,34 @@ function PlantDetail() {
               />
             </div>
 
-            <p>Progress: {habit.progress} / {habit.frequency}</p>
-            <p>Frequency: {habit.frequency}x per week</p>
+            <p>Experience: {habit.experience || 0} / 7</p>
+            <p>Level: {habit.level}</p>
             <p>Streak: {habit.streak} week{habit.streak !== 1 ? 's' : ''} in a row</p>
 
-            <button
-              className="delete-button"
-              onClick={handleDelete}
-            >
-            
+            <button className="delete-button" onClick={handleDelete}>
               Delete Habit
-              </button>
+            </button>
 
-              <button
-                className="watering-can-button"
-                onClick={handleComplete}
-                disabled={isMaxed}
-                title={isMaxed ? "Max progress reached" : "Water plant"}
+            <button
+              className="watering-can-button"
+              onClick={handleComplete}
+              disabled={isMaxed}
+              title={isMaxed ? 'Max experience reached' : 'Water plant'}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                className={`watering-can-icon ${isMaxed ? 'disabled' : ''}`}
               >
-                {/* Inline SVG for watering can */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  className={`watering-can-icon ${isMaxed ? 'disabled' : ''}`}
-                >
-                  <path
-                    fill={isMaxed ? '#aaa' : '#3498db'}
-                    d="M19 5c-.6 0-1 .4-1 1v2.1l-3.2-.6c-.3-.1-.5.1-.6.3l-.8 2.1-2-1.1V8c0-.6-.4-1-1-1s-1 .4-1 1v1.5L6 10V8c0-.6-.4-1-1-1s-1 .4-1 1v2.3c0 .5.3.8.7.9l5.3 1.2-1.7 5.6c-.2.6.2 1.3.9 1.4.6.2 1.3-.2 1.4-.9l1.8-6.1 2.6 1.4c.5.3 1.1.1 1.4-.4l1.1-2.9 2.1.4V18c0 .6.4 1 1 1s1-.4 1-1V6c0-.6-.4-1-1-1z"
-                  />
-                </svg>
-                {isMaxed ? 'Done' : 'Water Plant'}
-              </button>
-            </div>
+                <path
+                  fill={isMaxed ? '#aaa' : '#3498db'}
+                  d="M19 5c-.6 0-1 .4-1 1v2.1l-3.2-.6c-.3-.1-.5.1-.6.3l-.8 2.1-2-1.1V8c0-.6-.4-1-1-1s-1 .4-1 1v1.5L6 10V8c0-.6-.4-1-1-1s-1 .4-1 1v2.3c0 .5.3.8.7.9l5.3 1.2-1.7 5.6c-.2.6.2 1.3.9 1.4.6.2 1.3-.2 1.4-.9l1.8-6.1 2.6 1.4c.5.3 1.1.1 1.4-.4l1.1-2.9 2.1.4V18c0 .6.4 1 1 1s1-.4 1-1V6c0-.6-.4-1-1-1z"
+                />
+              </svg>
+              {isMaxed ? 'Done' : 'Water Plant'}
+            </button>
           </div>
+        </div>
       </main>
       <Footer />
     </>
