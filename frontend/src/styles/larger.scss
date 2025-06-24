@@ -16,7 +16,6 @@
 
   .content {
     min-width: 770px;
-    max-height: 525px;
     gap: 20px;
     padding: 20px;
   }
@@ -103,6 +102,7 @@
 
   .content {
     max-width: 770px;
+    height: 81vh;
     grid-template-columns: 225px 225px 225px;
     /*gap: 30px;*/
   }
