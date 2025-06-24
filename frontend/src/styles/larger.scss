@@ -11,13 +11,14 @@
   .bottom-bar{
     bottom: 0;
     width: 100%;
-    max-width: 770px;
+    max-width:500px;
   }
 
   .content {
-    min-width: 770px;
+    max-width: 500px;
     gap: 20px;
     padding: 20px;
+    height: 81vh;
   }
 
   .delete-account-button{
@@ -75,7 +76,7 @@
   .top-bar {
     margin: 0 auto;
     width: 100%;
-    max-width: 770px;
+    max-width: 500px;
   }
 
   .watering-can-button{
@@ -105,6 +106,10 @@
     height: 81vh;
     grid-template-columns: 225px 225px 225px;
     /*gap: 30px;*/
+  }
+
+  .top-bar {
+    max-width: 770px;
   }
 
   /* Reapply plant grid placement if needed */
