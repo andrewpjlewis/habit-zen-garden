@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function useCachedFetch(url, cacheKey, cacheMinutes = 10, options = {}) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -30,10 +32,18 @@ export function useCachedFetch(url, cacheKey, cacheMinutes = 10, options = {}) {
         headers,
       })
         .then(async (res) => {
+          if (res.status === 401) {
+            localStorage.removeItem("token");
+            alert("Session expired. Please log in again.");
+            navigate("/login");
+            throw new Error("Unauthorized");
+          }
+
           if (!res.ok) {
             const errText = await res.text();
             throw new Error(`Fetch failed: ${res.status} - ${errText}`);
           }
+
           return res.json();
         })
         .then((result) => {
@@ -44,7 +54,7 @@ export function useCachedFetch(url, cacheKey, cacheMinutes = 10, options = {}) {
         .catch(console.error)
         .finally(() => setLoading(false));
     }
-  }, [url, cacheKey, cacheMinutes, JSON.stringify(options)]);
+  }, [url, cacheKey, cacheMinutes, JSON.stringify(options), navigate]);
 
   return { data, loading };
 }
