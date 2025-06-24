@@ -128,7 +128,7 @@ main {
   grid-template-rows: repeat(3, 200px);
   gap: 15px;
   box-sizing: border-box;
-  height: 70vh;
+  height: 68vh;
   margin-top: 95px;
 }
 
