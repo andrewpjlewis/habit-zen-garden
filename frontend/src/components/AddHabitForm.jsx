@@ -83,6 +83,7 @@ function AddHabit({ onAddHabit }) {
             type="text"
             placeholder="Add Goal Name"
             value={goalName}
+            maxLength={12}
             onChange={(e) => setGoalName(e.target.value)}
           />
           <FaPencilAlt className="pencil-icon" />
@@ -93,6 +94,7 @@ function AddHabit({ onAddHabit }) {
           <input
             type="number"
             min="1"
+            max="7"
             placeholder="Times per week"
             value={frequency}
             onChange={(e) => setFrequency(e.target.value)}
