@@ -44,7 +44,7 @@ function Header() {
       <button 
         onClick={goToProfile} 
         aria-label="Go to Profile"
-        class="profileImage"
+        className="profileImage"
         style={{
           background: 'none',
           border: 'none',
