@@ -232,17 +232,20 @@ main {
   text-decoration: none;
   outline: none;
   border-radius: 15px;
-  padding: 10px;
+  padding-bottom: 10px;
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   height: 170px;
   transition: background-color 0.3s;
 }
-.plant p, .plant h3 {
-  margin: 5px 0;
+.plant div h3 {
+  margin: 0.5em 0 0 0;
+}
+.plant div p {
+  margin: 0;
 }
 .plant:visited {
   text-decoration: none;
@@ -252,7 +255,7 @@ main {
   background-color: rgba(0, 0, 0, 0.9);
 }
 .plant img {
-  height: 80px;
+  width: 3em;
 }
 
 .profileImage {
@@ -276,7 +279,7 @@ main {
 }
 
 .plant-image {
-  height: 80px;
+  width: 5em;
 }
 
 .progress-bar-container {
