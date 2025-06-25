@@ -258,6 +258,39 @@ main {
   width: 3em;
 }
 
+.goal-name-box {
+  background-color: #f3f3f3;
+  border-radius: 15px;
+  padding: 10px 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  border: 2px solid #ccc;
+}
+.goal-name-box select {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  background-color: transparent;
+  color: #555;
+  font-family: "Outfit", Arial, sans-serif;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg fill='%23555' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+.goal-name-box .pencil-icon {
+  color: #888;
+  margin-left: 10px;
+  pointer-events: none;
+}
+
 .profileImage {
   height: 80px;
   width: 80px;
