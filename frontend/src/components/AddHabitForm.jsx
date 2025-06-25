@@ -59,6 +59,39 @@ function AddHabit({ onAddHabit }) {
     }
   };
 
+  const presetGoals = [
+  "Meditate",
+  "Workout",
+  "Journal",
+  "Read book",
+  "Stretch",
+  "Drink water",
+  "Make bed",
+  "Check email",
+  "Meal prep",
+  "Clean room",
+  "Walk dog",
+  "Call mom",
+  "Pray",
+  "Review goals",
+  "Brush teeth",
+  "Floss",
+  "Skin care",
+  "Plan day",
+  "Pack lunch",
+  "Do laundry",
+  "Water plants",
+  "Eat fruit",
+  "Inbox zero",
+  "Budget check",
+  "Post update",
+  "Learn code",
+  "Study",
+  "Cook dinner",
+  "Sleep early",
+  "Smile more",
+];
+
   return (
     <div className="add-habit-form-container">
       <form className="add-habit-form" onSubmit={handleSubmit}>
@@ -79,14 +112,17 @@ function AddHabit({ onAddHabit }) {
         <p className="habit-title">Select Your Plant</p>
 
         <div className="goal-name-box">
-          <input
-            type="text"
-            placeholder="Add Goal Name"
+          <select
             value={goalName}
-            maxLength={12}
             onChange={(e) => setGoalName(e.target.value)}
-          />
-          <FaPencilAlt className="pencil-icon" />
+          >
+            <option value="">Select Goal</option>
+            {presetGoals.map((goal, index) => (
+              <option key={index} value={goal}>
+                {goal}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="frequency-section">
