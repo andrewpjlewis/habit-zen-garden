@@ -262,17 +262,21 @@ main {
   text-decoration: none;
   outline: none;
   border-radius: 15px;
-  padding: 10px;
+  padding-bottom: 10px;
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   height: 170px;
   transition: background-color 0.3s;
 
-  p, h3 {
-    margin: 5px 0;
+  div h3{
+    margin: .5em 0 0 0;
+  }
+
+  div p {
+    margin: 0;
   }
 
   &:visited {
@@ -285,7 +289,7 @@ main {
   }
 
   img {
-    height: 80px;
+    width: 3em;
   }
 }
 
@@ -310,7 +314,7 @@ main {
 }
 
 .plant-image {
-  height: 80px;
+  width: 5em;
 }
 
 .progress-bar-container {

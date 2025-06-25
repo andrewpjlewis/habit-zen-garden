@@ -8,8 +8,10 @@ function Plant({ habit }) {
 
   return (
     <Link to={`/plants/${habit._id}`} className="plant">
-      <p>{habit.frequency}x per week</p>
-      <h3>{habit.name}</h3>
+      <div id='plant-title'>
+        <h3>{habit.name}</h3>
+        <p>{habit.frequency}x per week</p>
+      </div>
       <img src={plantImgSrc} alt={`Plant image for ${habit.name}`} />
     </Link>
   );
