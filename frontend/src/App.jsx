@@ -7,46 +7,48 @@ import AddHabit from './pages/AddHabit';
 import Welcome from './pages/Welcome';
 import PlantDetail from './pages/PlantDetail';
 import Profile from './pages/Profile';
+import Shop from './pages/Shop';
 
 import { HabitsProvider } from './context/HabitsContext';
 
-function App() {
+// Helper wrapper for protected routes
+function PrivateRoute({ children }) {
   const { isLoggedIn } = useAuth();
+  return isLoggedIn ? children : <Navigate to="/login" />;
+}
 
+function PublicRoute({ children }) {
+  const { isLoggedIn } = useAuth();
+  return !isLoggedIn ? children : <Navigate to="/dashboard" />;
+}
+
+function App() {
   return (
     <HabitsProvider>
       <BrowserRouter>
         <Routes>
-          <Route 
-            path="/login" 
-            element={!isLoggedIn ? <Login /> : <Navigate to="/dashboard" />} 
+          {/* Public routes */}
+          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+          <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+
+          {/* Private routes */}
+          <Route path="/welcome" element={<PrivateRoute><Welcome /></PrivateRoute>} />
+          <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+          <Route path="/dashboard/add" element={<PrivateRoute><AddHabit /></PrivateRoute>} />
+          <Route path="/plants/:id" element={<PrivateRoute><PlantDetail /></PrivateRoute>} />
+          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path="/shop" element={<PrivateRoute><Shop /></PrivateRoute>} />
+
+          {/* Root redirect */}
+          <Route
+            path="/"
+            element={
+              <Navigate to={useAuth().isLoggedIn ? "/dashboard" : "/login"} replace />
+            }
           />
-          <Route 
-            path="/register" 
-            element={!isLoggedIn ? <Register /> : <Navigate to="/dashboard" />} 
-          />
-          <Route 
-            path="/welcome" 
-            element={isLoggedIn ? <Welcome /> : <Navigate to="/login" />} 
-          />
-          <Route 
-            path="/dashboard" 
-            element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} 
-          />
-          <Route 
-            path="/dashboard/add" 
-            element={isLoggedIn ? <AddHabit /> : <Navigate to="/login" />} 
-          />
-          <Route path="/plants/:id" element={<PlantDetail />} />
-          <Route 
-            path="/" 
-            element={<Navigate to={isLoggedIn ? "/dashboard" : "/login"} />} 
-          />
-          <Route 
-            path="/profile" 
-            element={isLoggedIn ? <Profile /> : <Navigate to="/login" />} 
-          />
-          <Route path="*" element={<Navigate to="/" />} />
+
+          {/* Catch-all redirect */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </HabitsProvider>
