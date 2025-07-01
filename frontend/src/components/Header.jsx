@@ -11,6 +11,7 @@ function Header() {
     navigate('/profile');
   };
 
+  
   return (
     <header className="top-bar">
       <button 
