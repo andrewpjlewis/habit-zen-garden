@@ -5,27 +5,31 @@
     background-repeat: no-repeat;
     background-position: center;
     background-image: url("../images/background-hd.png");
+    width: 500px;
   }
   /*Classes*/
   .bottom-bar {
     bottom: 0;
-    width: 100%;
-    max-width: 500px;
+    width: 500px;
   }
   .content {
-    max-width: 500px;
+    width: 500px;
     gap: 20px;
     padding: 20px;
-    height: 32.5em;
+    height: 80vh;
+    align-items: center;
+    justify-content: center;
   }
   .delete-account-button:hover {
     background-color: lightcoral;
     color: darkred;
   }
   .profile-container {
-    min-width: 730px;
-    min-height: 550px;
+    max-width: 500px;
     gap: 20px;
+  }
+  .profile-info {
+    width: 350px;
   }
   .delete-button:hover {
     background-color: lightcoral;
@@ -73,13 +77,19 @@
   .add-habit-form-container {
     max-width: 770px;
   }
+  .add-habit-form {
+    max-width: 500px;
+  }
+  main {
+    width: 770px;
+  }
   .bottom-bar {
     bottom: 0;
     width: 100%;
     max-width: 770px;
   }
   .content {
-    max-width: 770px;
+    width: 770px;
     grid-template-columns: 225px 225px 225px;
     /*gap: 30px;*/
   }
@@ -87,6 +97,9 @@
     height: 100px;
   }
   .plant-detail-container {
+    max-width: 770px;
+  }
+  .profile-container {
     max-width: 770px;
   }
   .top-bar {
