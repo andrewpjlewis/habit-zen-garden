@@ -1,0 +1,27 @@
+name: Daily Wither Job
+
+on:
+  schedule:
+    - cron: '0 8 * * *' # every day at 8 AM UTC
+  workflow_dispatch:     # allows manual trigger in GitHub UI
+
+jobs:
+  wither:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: ⬇️ Checkout repo
+      uses: actions/checkout@v3
+
+    - name: ⚙️ Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: 📦 Install dependencies
+      run: npm install --prefix backend
+
+    - name: 🌿 Run wither script
+      env:
+        MONGO_URI: ${{ secrets.MONGO_URI }}
+      run: node backend/dailyWither.js
