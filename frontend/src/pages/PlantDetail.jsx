@@ -67,21 +67,37 @@ function PlantDetail() {
           Authorization: `Bearer ${token}`,
         },
       });
-
+    
       if (!res.ok) throw new Error('Failed to complete habit');
-
+    
       const updatedHabit = await res.json();
-
+    
+      // 1. Update individual habit cache
+      localStorage.setItem(`habit_${id}`, JSON.stringify(updatedHabit));
+      localStorage.setItem(`habit_${id}_at`, Date.now());
+      setHabitState(updatedHabit);
+    
+      // 2. Optional: Show level-up animation
       const oldHabit = JSON.parse(localStorage.getItem(`habit_${id}`));
       if (oldHabit && updatedHabit.level > oldHabit.level) {
         setLeveledUp(true);
         setTimeout(() => setLeveledUp(false), 3000);
       }
-
-      localStorage.setItem(`habit_${id}`, JSON.stringify(updatedHabit));
-      localStorage.setItem(`habit_${id}_at`, Date.now());
-
-      setHabitState(updatedHabit);
+    
+      // 3. 🔄 Refresh full dashboard cache
+      const habitsRes = await fetch('https://habit-zen-garden.onrender.com/api/habits', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+    
+      if (habitsRes.ok) {
+        const freshHabits = await habitsRes.json();
+        localStorage.setItem('habitData', JSON.stringify(freshHabits));
+        localStorage.setItem('habitData_at', Date.now());
+      }
+    
     } catch (err) {
       alert(err.message || 'Error completing habit');
     }
