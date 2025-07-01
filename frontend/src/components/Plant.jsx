@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { getPlantStage } from '../utils/plantGrowth';
 
 function Plant({ habit }) {
-  const stage = getPlantStage(habit.level);
+  const stage = getPlantStage(habit.level, habit.witherLevel || 0);
   const plantImgSrc = `/plants/${habit.plantType}_${stage}.svg`;
 
   return (

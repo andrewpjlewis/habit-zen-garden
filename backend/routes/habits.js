@@ -71,23 +71,25 @@ router.patch('/:id/complete', verifyToken, async (req, res, next) => {
     startOfWeek.setHours(0, 0, 0, 0);
     startOfWeek.setDate(today.getDate() - today.getDay());
 
+    // 🗓 Weekly check — reset completions, streak, and possibly level
     if (habit.lastWeekStart && new Date(habit.lastWeekStart) < startOfWeek) {
       const completionsLastWeek = habit.completions.length;
       const frequency = habit.frequency || 1;
 
       if (completionsLastWeek >= frequency) {
         habit.streak += 1;
-      } else if (completionsLastWeek > 0 && completionsLastWeek < frequency) {
+      } else if (completionsLastWeek > 0) {
         habit.streak = Math.max(habit.streak - 1, 0);
       } else {
         habit.streak = 0;
-        habit.level = Math.max(habit.level - 1, 0);
+        habit.level = Math.max(habit.level - 1, 0); // decay only weekly
       }
 
       habit.completions = [];
       habit.lastWeekStart = startOfWeek;
     }
 
+    // 🔁 Check if already logged today
     const alreadyLoggedToday = habit.completions.some(
       (date) => new Date(date).toDateString() === todayStr
     );
@@ -95,16 +97,17 @@ router.patch('/:id/complete', verifyToken, async (req, res, next) => {
       return res.status(400).json({ message: 'Habit already logged today' });
     }
 
-    // 🔥 Experience and level-up logic
-    if (typeof habit.experience !== 'number') habit.experience = 0;
-    habit.experience += 5;
+    // ✅ Complete habit today
+    habit.completions.push(today);
+    habit.experience = (habit.experience || 0) + 5;
 
     if (habit.experience >= 5) {
-      habit.level += 1;
+      habit.level = Math.min(habit.level + 1, 10); // level cap
       habit.experience = 0;
     }
 
-    habit.completions.push(today);
+    // 🌸 Reset withering on successful completion
+    habit.witherLevel = 0;
 
     await habit.save();
     res.json(habit);
