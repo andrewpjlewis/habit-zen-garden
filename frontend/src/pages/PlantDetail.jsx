@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import { useCachedFetch } from '../utils/useCachedFetch';
 import { getPlantStage } from '../utils/plantGrowth';
 
+
 function PlantDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -93,6 +94,7 @@ function PlantDetail() {
   const isMaxed = habit.experience >= 7;
   const stage = getPlantStage(habit.level);
   const plantImgSrc = `/plants/${habit.plantType}_${stage}.svg`;
+  const goToAddHabit = () => navigate('/dashboard/add');
 
   return (
     <>
@@ -163,7 +165,7 @@ function PlantDetail() {
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer onAddClick={goToAddHabit}/>
     </>
   );
 }
