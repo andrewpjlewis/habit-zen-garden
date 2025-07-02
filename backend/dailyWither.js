@@ -13,26 +13,35 @@ async function witherHabitsDaily() {
     console.log('✅ Connected to MongoDB');
 
     const habits = await Habit.find({});
-    const todayStr = new Date().toDateString();
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayStr = yesterday.toDateString();
 
     let updated = 0;
 
     for (let habit of habits) {
-      const completedToday = habit.completions?.some(
-        (date) => new Date(date).toDateString() === todayStr
+      const completedYesterday = habit.completions?.some(
+        (date) => new Date(date).toDateString() === yesterdayStr
       );
 
-      if (!completedToday && (habit.witherLevel ?? 0) < 3) {
+      // If NOT completed yesterday and wither level is below the limit
+      if (!completedYesterday && (habit.witherLevel ?? 0) < 3) {
         habit.witherLevel = (habit.witherLevel ?? 0) + 1;
         await habit.save();
         updated++;
+        console.log(`🌿 "${habit.name}" withered to level ${habit.witherLevel}`);
+      } else if (completedYesterday) {
+        console.log(`✅ "${habit.name}" was completed yesterday`);
+      } else {
+        console.log(`⚠️ "${habit.name}" already at max wither level`);
       }
     }
 
-    console.log(`🌿 Withered ${updated} habit(s)`);
+    console.log(`🌱 Withered ${updated} habit(s) due to inactivity yesterday.`);
   } catch (err) {
     console.error('❌ Error in witherHabitsDaily:', err);
   } finally {
+    // Disconnect from MongoDB
     await mongoose.disconnect();
     console.log('🔌 Disconnected from MongoDB');
   }
