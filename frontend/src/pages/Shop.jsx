@@ -18,7 +18,7 @@ function Shop() {
               <p>Welcome to the shop! Browse our products below.</p>
               <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
                 {products.map(product => (
-                  <li key={product.id} style={{ marginBottom: '15px', border: '1px solid #ccc', padding: '10px', borderRadius: '5px' }}>
+                  <li key={product.id}>
                     <strong>{product.name}</strong> — {product.price}
                     {/* You can add buttons, images, descriptions here */}
                   </li>
