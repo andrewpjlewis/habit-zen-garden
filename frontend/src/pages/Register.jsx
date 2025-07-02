@@ -96,6 +96,7 @@ function Register() {
         <button
           onClick={() => navigate('/login')}
           disabled={loading}
+          class="default-btn"
         >
           Log in here
         </button>

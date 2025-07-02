@@ -99,6 +99,7 @@ function Login() {
         <button
           onClick={() => navigate('/register')}
           disabled={loading}
+          class="default-btn"
         >
           Register here
         </button>
