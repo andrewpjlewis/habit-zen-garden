@@ -416,8 +416,11 @@ main {
 }
 .top-bar > svg:not(.left-image) {
   height: 100px;
-  width: 100;
+  width: 100px;
   margin: 0 auto;
+}
+.top-bar svg {
+  color: black;
 }
 
 .add-habit-form {
