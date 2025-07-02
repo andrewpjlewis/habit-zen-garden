@@ -46,6 +46,12 @@
       font-weight: 700;
     }
   }
+
+  .frequency-section{
+    h3{
+      margin-top: 5px;
+    }
+  }
   
   .left-image {
     height: 80px;
@@ -58,17 +64,19 @@
 
   .plant-detail-container {
     max-width: 500px;
-    height: 81vh;
+    height: 75vh;
   }
 
   .plant-detail {
     max-width: 425px;
+    height: 63vh;
   }
 
   .add-habit-form-container {
     max-width: 500px;
-    height: 81vh;
+    height: 75vh;
     padding: 30px 0 0 0;
+    margin-top: 90px;
   }
 
   .settings-panel{
