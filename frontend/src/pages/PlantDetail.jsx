@@ -5,7 +5,6 @@ import Footer from '../components/Footer';
 import { useCachedFetch } from '../utils/useCachedFetch';
 import { getPlantStage } from '../utils/plantGrowth';
 
-
 function PlantDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -67,37 +66,33 @@ function PlantDetail() {
           Authorization: `Bearer ${token}`,
         },
       });
-    
+
       if (!res.ok) throw new Error('Failed to complete habit');
-    
+
       const updatedHabit = await res.json();
-    
-      // 1. Update individual habit cache
+
       localStorage.setItem(`habit_${id}`, JSON.stringify(updatedHabit));
       localStorage.setItem(`habit_${id}_at`, Date.now());
       setHabitState(updatedHabit);
-    
-      // 2. Optional: Show level-up animation
+
       const oldHabit = JSON.parse(localStorage.getItem(`habit_${id}`));
       if (oldHabit && updatedHabit.level > oldHabit.level) {
         setLeveledUp(true);
         setTimeout(() => setLeveledUp(false), 3000);
       }
-    
-      // 3. 🔄 Refresh full dashboard cache
+
       const habitsRes = await fetch('https://habit-zen-garden.onrender.com/api/habits', {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });
-    
+
       if (habitsRes.ok) {
         const freshHabits = await habitsRes.json();
         localStorage.setItem('habitData', JSON.stringify(freshHabits));
         localStorage.setItem('habitData_at', Date.now());
       }
-    
     } catch (err) {
       alert(err.message || 'Error completing habit');
     }
@@ -108,8 +103,18 @@ function PlantDetail() {
   if (!habit) return <p>No habit found.</p>;
 
   const isMaxed = habit.experience >= 7;
-  const stage = getPlantStage(habit.level);
-  const plantImgSrc = `/plants/${habit.plantType}_${stage}.svg`;
+
+  // Use getPlantStage exactly like in Plant.jsx to get both stage and witheredStage
+  const { stage, witheredStage } = getPlantStage(
+    Number(habit.level ?? 0),
+    Number(habit.witheredLevel ?? 0)
+  );
+
+  // Build the image src with or without witheredStage
+  const plantImgSrc = witheredStage
+    ? `/plants/${habit.plantType}_${stage}_${witheredStage}.svg`
+    : `/plants/${habit.plantType}_${stage}.svg`;
+
   const goToAddHabit = () => navigate('/dashboard/add');
 
   return (
@@ -181,7 +186,7 @@ function PlantDetail() {
           </div>
         </div>
       </main>
-      <Footer onAddClick={goToAddHabit}/>
+      <Footer onAddClick={goToAddHabit} />
     </>
   );
 }

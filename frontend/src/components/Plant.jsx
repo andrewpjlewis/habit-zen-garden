@@ -3,12 +3,21 @@ import { Link } from 'react-router-dom';
 import { getPlantStage } from '../utils/plantGrowth';
 
 function Plant({ habit }) {
-  const stage = getPlantStage(habit.level, habit.witherLevel || 0);
-  const plantImgSrc = `/plants/${habit.plantType}_${stage}.svg`;
+  const { stage, witheredStage } = getPlantStage(
+    Number(habit.level ?? 0),
+    Number(habit.witheredLevel ?? 0)
+  );
+
+  // Assign plantImgSrc based on witheredStage presence
+  const plantImgSrc = witheredStage
+    ? `/plants/${habit.plantType}_${stage}_${witheredStage}.svg`
+    : `/plants/${habit.plantType}_${stage}.svg`;
+
+  console.log(`Plant image source: ${plantImgSrc}`);
 
   return (
     <Link to={`/plants/${habit._id}`} className="plant">
-      <div id='plant-title'>
+      <div id="plant-title">
         <h3>{habit.name}</h3>
         <p>{habit.frequency}x per week</p>
       </div>

@@ -1,10 +1,14 @@
-export function getPlantStage(level, witheredLevel = 0) {
-  if (witheredLevel === 1) return 'withered1';
-  if (witheredLevel === 2) return 'withered2';
-  if (witheredLevel >= 3) return 'withered3';
+export function getPlantStage(level = 0, witheredLevel = 0) {
+  let stage = 'phase1';
+  let witheredStage = null;
 
-  if (level >= 10) return 'phase3';
-  if (level >= 4) return 'phase3';
-  if (level >= 2) return 'phase2';
-  return 'phase1';
+  if (level >= 10) stage = 'phase3';
+  else if (level >= 4) stage = 'phase3';
+  else if (level >= 2) stage = 'phase2';
+
+  if (witheredLevel === 1) witheredStage = 'withered1';
+  else if (witheredLevel === 2) witheredStage = 'withered2';
+  else if (witheredLevel >= 3) witheredStage = 'withered3';
+
+  return { stage, witheredStage };
 }
