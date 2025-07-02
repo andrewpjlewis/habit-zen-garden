@@ -11,7 +11,7 @@ const habitSchema = new mongoose.Schema({
   completions: { type: [Date], default: [] }, // timestamps of completions
   lastWeekStart: { type: Date, default: null }, // when we started tracking this week
   createdAt: { type: Date, default: Date.now },
-  witheredLever: { type: Number, default: 0, } // 0 = healthy, 1-3 = stages of withering
+  witheredLevel: { type: Number, default: 0, } // 0 = healthy, 1-3 = stages of withering
 });
 
 habitSchema.index({ userId: 1, name: 1 });
