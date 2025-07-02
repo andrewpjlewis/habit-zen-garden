@@ -1,12 +1,12 @@
 import { createContext, useState, useContext, useEffect } from "react";
+import { clearCache } from "../utils/useCachedFetch";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
-    // Load user data from localStorage on initial render
-    const token = localStorage.getItem('token');
-    const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
     if (token && userId) {
       return { token, userId };
     }
@@ -17,14 +17,26 @@ export function AuthProvider({ children }) {
 
   const login = (userData) => {
     setUser(userData);
-    localStorage.setItem('token', userData.token);
-    localStorage.setItem('userId', userData.userId);
+    localStorage.setItem("token", userData.token);
+    localStorage.setItem("userId", userData.userId);
+
+    // Clear and refresh any cached data
+    clearCache(["dashboardData", "profileData", "plantData"]);
+
+    // Notify components that a login occurred
+    window.dispatchEvent(new Event("login"));
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    
+    // Clear cached data
+    clearCache(["dashboardData", "profileData", "plantData"]);
+
+    // Notify components of logout
+    window.dispatchEvent(new Event("logout"));
   };
 
   return (
