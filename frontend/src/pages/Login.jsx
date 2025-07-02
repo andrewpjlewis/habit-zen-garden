@@ -40,10 +40,6 @@ function Login() {
 
       console.log('✅ Login successful:', data);
 
-      // Clear cached habits
-      localStorage.removeItem('habitData');
-      localStorage.removeItem('habitData_at');
-
       // Save user data
       login({
         userId: data.userId,

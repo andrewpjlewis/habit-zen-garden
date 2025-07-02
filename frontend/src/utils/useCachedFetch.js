@@ -1,6 +1,24 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// utils/useCachedFetch.js or a separate utils/cacheUtils.js
+export function clearCache(keys = [], matchPatterns = []) {
+  // Remove known cache keys
+  keys.forEach((key) => {
+    localStorage.removeItem(key);
+    localStorage.removeItem(`${key}_at`);
+  });
+
+  // Remove dynamic keys using prefix matching
+  Object.keys(localStorage).forEach((key) => {
+    matchPatterns.forEach((pattern) => {
+      if (key.startsWith(pattern)) {
+        localStorage.removeItem(key);
+      }
+    });
+  });
+}
+
 export function useCachedFetch(url, cacheKey, cacheMinutes = 10, options = {}) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,6 +37,7 @@ export function useCachedFetch(url, cacheKey, cacheMinutes = 10, options = {}) {
 
       if (res.status === 401) {
         localStorage.removeItem("token");
+        clearCache([cacheKey]);
         alert("Session expired. Please log in again.");
         navigate("/login");
         throw new Error("Unauthorized");
