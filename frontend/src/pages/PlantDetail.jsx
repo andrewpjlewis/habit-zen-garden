@@ -149,7 +149,7 @@ function PlantDetail() {
               <div
                 style={{
                   width: `${(habit.experience / 7) * 100}%`,
-                  backgroundColor: '#4caf50',
+                  backgroundColor: 'linear-gradient(to right,rgb(45, 108, 83) , #4caf50)',
                   height: '100%',
                   borderRadius: 10,
                   transition: 'width 0.5s ease-in-out',
