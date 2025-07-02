@@ -13,7 +13,7 @@ function Shop() {
     <>
         <Header />
         <main>
-            <div style={{ padding: '20px' }}>
+            <div class="shopMenu">
               <h1>Shop</h1>
               <p>Welcome to the shop! Browse our products below.</p>
               <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
