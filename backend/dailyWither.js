@@ -25,11 +25,11 @@ async function witherHabitsDaily() {
       );
 
       // If NOT completed yesterday and wither level is below the limit
-      if (!completedYesterday && (habit.witherLevel ?? 0) < 3) {
-        habit.witherLevel = (habit.witherLevel ?? 0) + 1;
+      if (!completedYesterday && (habit.witheredLevel ?? 0) < 3) {
+        habit.witheredLevel = (habit.witheredLevel ?? 0) + 1;
         await habit.save();
         updated++;
-        console.log(`🌿 "${habit.name}" withered to level ${habit.witherLevel}`);
+        console.log(`🌿 "${habit.name}" withered to level ${habit.witheredLevel}`);
       } else if (completedYesterday) {
         console.log(`✅ "${habit.name}" was completed yesterday`);
       } else {
