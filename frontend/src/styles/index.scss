@@ -473,6 +473,31 @@ main {
   }
 }
 
+.shopMenu{
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  padding: 20px 15px;
+  margin-top: 95px;
+  width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+
+  > p {
+    font-size: 1.25em;
+  }
+
+  > ul{
+    > li {
+      background-color: rgba(0, 0, 0, 0.5);
+      margin-bottom: 15px;
+      border: 1px solid #ccc; 
+      padding: 15px;
+      border-radius: 15px;
+    }
+  }
+}
+
 .top-bar {
   flex: 0 0 80px;
   position: fixed;
