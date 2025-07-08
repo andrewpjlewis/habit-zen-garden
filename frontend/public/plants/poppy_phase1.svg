@@ -1,44 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 292.41 394.12">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: #5a3723;
-        stroke: #382217;
-      }
-
-      .cls-1, .cls-2, .cls-3 {
-        stroke-width: 2px;
-      }
-
-      .cls-1, .cls-2, .cls-3, .cls-4 {
-        stroke-miterlimit: 10;
-      }
-
-      .cls-2 {
-        fill: #995724;
-        stroke: #7a4521;
-      }
-
-      .cls-3 {
-        fill: #4c893f;
-        stroke: #3a5f2d;
-      }
-
-      .cls-4 {
-        fill: #b8d433;
-        stroke: #9ca539;
-        stroke-width: 3px;
-      }
-    </style>
-  </defs>
-  <g>
-    <path class="cls-2" d="M18.93,195.48l34.84,180.45c0,9.49,41.79,17.19,93.34,17.19s93.34-7.7,93.34-17.19l32.74-178.64-254.27-1.81Z"/>
-    <ellipse class="cls-2" cx="146.21" cy="153.16" rx="145.21" ry="87.89"/>
-    <ellipse class="cls-1" cx="145.8" cy="144.72" rx="138.53" ry="59.32"/>
-  </g>
-  <g>
-    <path class="cls-3" d="M113.33,52.3s29.64,90.78-2.6,116h5.14s32.4-21.41,2.38-116.38l-4.92.38Z"/>
-    <path class="cls-4" d="M95.21,21.15c0-10.85,8.8-19.65,19.65-19.65s19.65,8.8,19.65,19.65-19.65,35.54-19.65,35.54c0,0-19.65-24.68-19.65-35.54Z"/>
-  </g>
+<svg width="292" height="396" viewBox="0 0 292 396" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_4_1245)">
+<path d="M18.93 197.48L53.77 377.93C53.77 387.42 95.56 395.12 147.11 395.12C198.66 395.12 240.45 387.42 240.45 377.93L273.19 199.29L18.92 197.48H18.93Z" fill="#995724" stroke="#7A4521" stroke-width="2" stroke-miterlimit="10"/>
+<path d="M146.21 243.05C226.407 243.05 291.42 203.7 291.42 155.16C291.42 106.62 226.407 67.27 146.21 67.27C66.0127 67.27 1 106.62 1 155.16C1 203.7 66.0127 243.05 146.21 243.05Z" fill="#995724" stroke="#7A4521" stroke-width="2" stroke-miterlimit="10"/>
+<path d="M145.8 206.04C222.308 206.04 284.33 179.482 284.33 146.72C284.33 113.958 222.308 87.4 145.8 87.4C69.292 87.4 7.27 113.958 7.27 146.72C7.27 179.482 69.292 206.04 145.8 206.04Z" fill="#5A3723" stroke="#382217" stroke-width="2" stroke-miterlimit="10"/>
+<path d="M113.33 54.3C113.33 54.3 142.97 145.08 110.73 170.3H115.87C115.87 170.3 148.27 148.89 118.25 53.92L113.33 54.3Z" fill="#4C893F" stroke="#3A5F2D" stroke-width="2" stroke-miterlimit="10"/>
+<path d="M95.21 23.15C95.21 12.3 104.01 3.5 114.86 3.5C125.71 3.5 134.51 12.3 134.51 23.15C134.51 34 114.86 58.69 114.86 58.69C114.86 58.69 95.21 34.01 95.21 23.15Z" fill="#B8D433" stroke="#9CA539" stroke-width="3" stroke-miterlimit="10"/>
+</g>
+<defs>
+<clipPath id="clip0_4_1245">
+<rect width="292" height="396" fill="white"/>
+</clipPath>
+</defs>
 </svg>
