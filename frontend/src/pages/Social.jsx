@@ -5,7 +5,7 @@ function Social() {
   // Example product list - you can replace with real data later
   const competitors = [
     { id: 1, name: 'Fearsome Rival', points: '3000', indicator: 'rank1' },
-    { id: 2, name: 'Habit Keeper (You)', points: '2500', indicator: 'rankYou'},
+    { id: 2, name: 'Habit Keeper (You)', points: '2501', indicator: 'rankYou'},
     { id: 3, name: 'Best Friend', points: '2500', indicator: 'rank3' },
     { id: 4, name: 'Random Person', points: '1000', indicator: 'rank4' },
   ];
