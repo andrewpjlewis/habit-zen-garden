@@ -20,6 +20,14 @@ function Footer({ onAddClick }) {
         navigate('/shop');
     }
 
+    const goToSocial = () => {
+        navigate('/social');
+    }
+
+    const goToCalendar = () => {
+        navigate('/calendar');
+    }
+
     useEffect(() => {
         function handleClickOutside(event) {
             if (settingsRef.current && !settingsRef.current.contains(event.target)) {
@@ -39,7 +47,7 @@ function Footer({ onAddClick }) {
     return (
         <footer>
             <div className="bottom-bar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" className="bottom-icon">
+                <svg onClick={goToSocial} xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" className="bottom-icon">
                     <path fill="currentColor" d="M16 17v2H2v-2s0-4 7-4s7 4 7 4m-3.5-9.5A3.5 3.5 0 1 0 9 11a3.5 3.5 0 0 0 3.5-3.5m3.44 5.5A5.32 5.32 0 0 1 18 17v2h4v-2s0-3.63-6.06-4M15 4a3.4 3.4 0 0 0-1.93.59a5 5 0 0 1 0 5.82A3.4 3.4 0 0 0 15 11a3.5 3.5 0 0 0 0-7"/>
                 </svg>
 
@@ -56,7 +64,7 @@ function Footer({ onAddClick }) {
                 <button onClick={onAddClick} className="add-plant-button">
                     <img src="/addPlant.svg" alt="Add Plant Icon" width="60" height="60" viewBox="0 0 24 24" className="bottom-icon"/>
                 </button>
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" className="bottom-icon">
+                <svg onClick={goToCalendar} xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" className="bottom-icon">
                     <path fill="currentColor" d="M19 4h-2V3a1 1 0 0 0-2 0v1H9V3a1 1 0 0 0-2 0v1H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3m1 15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7h16Zm0-9H4V7a1 1 0 0 1 1-1h2v1a1 1 0 0 0 2 0V6h6v1a1 1 0 0 0 2 0V6h2a1 1 0 0 1 1 1Z"/>
                 </svg>
 

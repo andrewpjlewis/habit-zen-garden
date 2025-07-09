@@ -562,6 +562,125 @@ main {
   margin-bottom: 5px;
 }
 
+.socialMenu {
+  align-items: start;
+  margin-top: 95px;
+  padding: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 100vh;
+  min-height: 300px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  border-radius: 20px;
+}
+
+.rankings > h2 {
+  text-align: left;
+}
+.rankings > ul {
+  list-style-type: none;
+  padding-left: 0px;
+}
+.rankings > ul > li {
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.rankings > ul > li > h3, .rankings > ul > li h4 {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+#rank1 {
+  background-color: rgba(253, 231, 108, 0.7490196078);
+  color: #342c03;
+}
+
+#rankYou {
+  background-color: rgba(121, 255, 121, 0.7490196078);
+  color: #162d16;
+}
+
+#rank3 {
+  background-color: rgba(183, 156, 107, 0.7490196078);
+  color: #292318;
+}
+
+#rank4 {
+  background-color: rgba(138, 136, 136, 0.7490196078);
+  color: #201f1f;
+}
+
+.calendarMenu {
+  align-items: start;
+  margin-top: 95px;
+  padding: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 100vh;
+  min-height: 300px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  border-radius: 20px;
+}
+
+.calendarGrid > table {
+  margin-left: auto;
+  margin-right: auto;
+}
+.calendarGrid > table > tr {
+  padding: 5px;
+}
+.calendarGrid > table > tr > th {
+  padding: 10px;
+  margin: 4px;
+  border-radius: 20px;
+}
+
+.current {
+  background-color: rgb(174, 174, 172);
+  color: rgb(48, 48, 48);
+}
+
+.streakKept {
+  background-color: rgb(255, 200, 98);
+  color: rgb(82, 37, 0);
+}
+
+.streakLost {
+  background-color: rgb(65, 0, 0);
+  color: rgb(255, 136, 136);
+}
+
+.today {
+  background-color: rgb(89, 250, 89);
+  color: rgb(15, 44, 15);
+}
+
+.upcoming {
+  background-color: #555454;
+  color: rgb(141, 140, 140);
+}
+
+.calendarEvents > ul {
+  padding-left: 0px;
+}
+.calendarEvents > ul > li {
+  background-color: rgba(153, 153, 153, 0.7490196078);
+  color: white;
+  padding: 15px;
+  border-radius: 20px;
+  list-style-type: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.calendarEvents > ul > li > h3, .calendarEvents > ul > li h4 {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
 .delete-button {
   grid-column: 1/1;
   background-color: red;
