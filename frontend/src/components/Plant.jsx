@@ -13,8 +13,6 @@ function Plant({ habit }) {
     ? `/plants/${habit.plantType}_${stage}_${witheredStage}.svg`
     : `/plants/${habit.plantType}_${stage}.svg`;
 
-  console.log(`Plant image source: ${plantImgSrc}`);
-
   return (
     <Link to={`/plants/${habit._id}`} className="plant">
       <div id="plant-title">

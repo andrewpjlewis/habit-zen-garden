@@ -27,17 +27,21 @@ export function AuthProvider({ children }) {
     window.dispatchEvent(new Event("login"));
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    
-    // Clear cached data
-    clearCache(["dashboardData", "profileData", "plantData"]);
+const logout = () => {
+  setUser(null);
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
 
-    // Notify components of logout
-    window.dispatchEvent(new Event("logout"));
-  };
+  clearCache([
+    "habitData",
+    "habitData_at",
+    "dashboardData",
+    "profileData",
+    "plantData",
+  ]);
+
+  window.dispatchEvent(new Event("logout"));
+};
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>

@@ -1,48 +1,42 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Footer({ onAddClick }) {
-    const [showSettings, setShowSettings] = useState(false);
-    const settingsRef = useRef(null);
-    const navigate = useNavigate();
+  const [showSettings, setShowSettings] = useState(false);
+  const settingsRef = useRef(null);
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
-    const toggleSettings = () => {
-        setShowSettings(prev => !prev);
+  const toggleSettings = () => {
+    setShowSettings((prev) => !prev);
+  };
+
+const handleLogout = () => {
+  logout();
+  navigate("/login");
+};
+
+
+  const goToShop = () => navigate("/shop");
+  const goToSocial = () => navigate("/social");
+  const goToCalendar = () => navigate("/calendar");
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+        setShowSettings(false);
+      }
+    }
+
+    if (showSettings) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-
-      const handleLogout = () => {
-        // Example: clear token and redirect
-        localStorage.removeItem('token');
-        window.location.href = '/login';
-    };
-
-    const goToShop = () => {
-        navigate('/shop');
-    }
-
-    const goToSocial = () => {
-        navigate('/social');
-    }
-
-    const goToCalendar = () => {
-        navigate('/calendar');
-    }
-
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (settingsRef.current && !settingsRef.current.contains(event.target)) {
-                setShowSettings(false);
-            }
-        }
-
-        if (showSettings) {
-            document.addEventListener("mousedown", handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [showSettings]);
+  }, [showSettings]);
 
     return (
         <footer>

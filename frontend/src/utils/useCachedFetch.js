@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// utils/useCachedFetch.js or a separate utils/cacheUtils.js
 export function clearCache(keys = [], matchPatterns = []) {
-  // Remove known cache keys
   keys.forEach((key) => {
     localStorage.removeItem(key);
     localStorage.removeItem(`${key}_at`);
   });
 
-  // Remove dynamic keys using prefix matching
   Object.keys(localStorage).forEach((key) => {
     matchPatterns.forEach((pattern) => {
       if (key.startsWith(pattern)) {
@@ -60,8 +57,10 @@ export function useCachedFetch(url, cacheKey, cacheMinutes = 10, options = {}) {
   useEffect(() => {
     const cached = localStorage.getItem(cacheKey);
     const cachedAt = localStorage.getItem(`${cacheKey}_at`);
-    const isFresh = cached && cachedAt &&
-      (Date.now() - Number(cachedAt) < cacheMinutes * 60 * 1000);
+    const isFresh =
+      cached &&
+      cachedAt &&
+      Date.now() - Number(cachedAt) < cacheMinutes * 60 * 1000;
 
     if (isFresh) {
       setData(JSON.parse(cached));
