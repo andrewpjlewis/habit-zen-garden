@@ -71,7 +71,7 @@ router.patch('/:id/complete', verifyToken, async (req, res, next) => {
     startOfWeek.setHours(0, 0, 0, 0);
     startOfWeek.setDate(today.getDate() - today.getDay());
 
-    // 🗓 Weekly check — reset completions, streak, and possibly level
+    // Weekly reset logic
     if (habit.lastWeekStart && new Date(habit.lastWeekStart) < startOfWeek) {
       const completionsLastWeek = habit.completions.length;
       const frequency = habit.frequency || 1;
@@ -82,14 +82,14 @@ router.patch('/:id/complete', verifyToken, async (req, res, next) => {
         habit.streak = Math.max(habit.streak - 1, 0);
       } else {
         habit.streak = 0;
-        habit.level = Math.max(habit.level - 1, 0); // decay only weekly
+        habit.level = Math.max(habit.level - 1, 0);
       }
 
       habit.completions = [];
       habit.lastWeekStart = startOfWeek;
     }
 
-    // 🔁 Check if already logged today
+    // Prevent duplicate logging for the day
     const alreadyLoggedToday = habit.completions.some(
       (date) => new Date(date).toDateString() === todayStr
     );
@@ -97,19 +97,21 @@ router.patch('/:id/complete', verifyToken, async (req, res, next) => {
       return res.status(400).json({ message: 'Habit already logged today' });
     }
 
-    // ✅ Complete habit today
+    // Add today's completion
     habit.completions.push(today);
-    habit.experience = (habit.experience || 0) + 5;
 
-    if (habit.experience >= 5) {
-      habit.level = Math.min(habit.level + 1, 10); // level cap
-      habit.experience = 0;
+    // Increase experience by 5, level up at 15 exp
+    habit.experience = (habit.experience || 0) + 5;
+    if (habit.experience >= 15) {
+      habit.level = Math.min(habit.level + 1, 10); // max level 10
+      habit.experience -= 15; // subtract 15, keep overflow exp
     }
 
-    // 🌸 Reset withering on successful completion
-    habit.witherLevel = 0;
+    // 🌸 Reset withered level on successful completion
+    habit.witheredLevel = 0;
 
     await habit.save();
+
     res.json(habit);
   } catch (err) {
     next(err);

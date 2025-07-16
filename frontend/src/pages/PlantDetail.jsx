@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import confetti from 'canvas-confetti'; // <-- import canvas-confetti
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -10,17 +11,15 @@ function PlantDetail() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
-  const options = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
   const { data, loading } = useCachedFetch(
     `https://habit-zen-garden.onrender.com/api/habits/${id}`,
     `habit_${id}`,
     7,
-    options
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
 
   const [habitState, setHabitState] = useState(null);
@@ -36,6 +35,40 @@ function PlantDetail() {
       setError('');
     }
   }, [token]);
+
+  // Function to run confetti explosion
+  function runConfetti() {
+    const duration = 7000; // 7 seconds
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
+
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        return;
+      }
+
+      const particleCount = 50 * (timeLeft / duration); // decrease particle count over time
+
+      // Left side burst
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: 0, y: 0.7 },
+        colors: ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a'],
+      });
+
+      // Right side burst
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: 1, y: 0.7 },
+        colors: ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a'],
+      });
+    }, 250);
+  }
 
   const handleDelete = async () => {
     if (!window.confirm('Are you sure you want to delete this habit?')) return;
@@ -59,6 +92,8 @@ function PlantDetail() {
 
   const handleComplete = async () => {
     try {
+      const oldHabit = habitState || data;
+
       const res = await fetch(`https://habit-zen-garden.onrender.com/api/habits/${id}/complete`, {
         method: 'PATCH',
         headers: {
@@ -75,12 +110,14 @@ function PlantDetail() {
       localStorage.setItem(`habit_${id}_at`, Date.now());
       setHabitState(updatedHabit);
 
-      const oldHabit = JSON.parse(localStorage.getItem(`habit_${id}`));
+      // Show confetti if leveled up
       if (oldHabit && updatedHabit.level > oldHabit.level) {
         setLeveledUp(true);
-        setTimeout(() => setLeveledUp(false), 3000);
+        runConfetti();
+        setTimeout(() => setLeveledUp(false), 7000);
       }
 
+      // Refresh habits cache
       const habitsRes = await fetch('https://habit-zen-garden.onrender.com/api/habits', {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -102,15 +139,16 @@ function PlantDetail() {
   if (error) return <p>{error}</p>;
   if (!habit) return <p>No habit found.</p>;
 
-  const isMaxed = habit.experience >= 7;
+  const MAX_LEVEL = 10;
+  const LEVEL_UP_EXP = 15;
 
-  // Use getPlantStage exactly like in Plant.jsx to get both stage and witheredStage
+  const isMaxed = habit.level >= MAX_LEVEL && habit.experience === 0;
+
   const { stage, witheredStage } = getPlantStage(
     Number(habit.level ?? 0),
     Number(habit.witheredLevel ?? 0)
   );
 
-  // Build the image src with or without witheredStage
   const plantImgSrc = witheredStage
     ? `/plants/${habit.plantType}_${stage}_${witheredStage}.svg`
     : `/plants/${habit.plantType}_${stage}.svg`;
@@ -131,7 +169,7 @@ function PlantDetail() {
             />
 
             {leveledUp && (
-              <div className="level-up-animation">
+              <div className="level-up-animation" style={{ fontSize: 24, fontWeight: 'bold', color: '#4caf50', marginBottom: 20 }}>
                 🌟 Your plant leveled up! 🌟
               </div>
             )}
@@ -148,8 +186,8 @@ function PlantDetail() {
             >
               <div
                 style={{
-                  width: `${(habit.experience / 7) * 100}%`,
-                  backgroundColor: 'linear-gradient(to right,rgb(45, 108, 83) , #4caf50)',
+                  width: `${(habit.experience / LEVEL_UP_EXP) * 100}%`,
+                  background: 'linear-gradient(to right, rgb(45, 108, 83), #4caf50)',
                   height: '100%',
                   borderRadius: 10,
                   transition: 'width 0.5s ease-in-out',
@@ -157,16 +195,18 @@ function PlantDetail() {
               />
             </div>
 
-            <p>Experience: {habit.experience || 0} / 7</p>
+            <p>Experience: {habit.experience || 0} / {LEVEL_UP_EXP}</p>
             <p>Level: {habit.level}</p>
-            <p>Streak: {habit.streak} week{habit.streak !== 1 ? 's' : ''} in a row</p>
+            <p>
+              Streak: {habit.streak} week{habit.streak !== 1 ? 's' : ''} in a row
+            </p>
 
             <button className="delete-button" onClick={handleDelete}>
               Delete Habit
             </button>
 
             <button
-              className="watering-can-button"
+              className={`watering-can-button ${isMaxed ? 'disabled' : ''}`}
               onClick={handleComplete}
               disabled={isMaxed}
               title={isMaxed ? 'Max experience reached' : 'Water plant'}

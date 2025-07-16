@@ -17,3 +17,4 @@ const habitSchema = new mongoose.Schema({
 habitSchema.index({ userId: 1, name: 1 });
 
 module.exports = mongoose.model('Habit', habitSchema);
+
