@@ -624,6 +624,138 @@ main {
   }
 }
 
+.socialMenu {
+  align-items: start;
+  margin-top: 95px;
+  padding: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 100vh;
+  min-height: 300px;
+  background-color: $transparent-black;
+  color: white;
+  border-radius: 20px;
+}
+
+.rankings {
+  > h2{
+    text-align: left;
+  }
+
+  > ul{
+    list-style-type: none;
+    padding-left: 0px;
+
+    > li{
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+
+      > h3, h4 {
+        margin-top: 2px;
+        margin-bottom: 2px;
+      }
+    }
+  }
+}
+
+#rank1 {
+  background-color: #fde76cbf;
+  color: #342c03;
+}
+
+#rankYou {
+  background-color: #79ff79bf;
+  color: #162d16;
+}
+
+#rank3 {
+  background-color: #b79c6bbf;
+  color: #292318;
+}
+
+#rank4 {
+  background-color: #8a8888bf;
+  color: #201f1f;
+}
+
+.calendarMenu {
+  align-items: start;
+  margin-top: 95px;
+  padding: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 100vh;
+  min-height: 300px;
+  background-color: $transparent-black;
+  color: white;
+  border-radius: 20px;
+}
+
+.calendarGrid{
+  > table {
+    margin-left: auto;
+    margin-right: auto;
+
+    > tr {
+      padding: 5px;
+      
+      > th {
+        padding: 10px;
+        margin: 4px;
+        border-radius: 20px;
+      }
+    }
+  }
+}
+
+.current{
+  background-color: rgb(174, 174, 172);
+  color: rgb(48, 48, 48);
+}
+
+.streakKept{
+  background-color: rgb(255, 200, 98);
+  color: rgb(82, 37, 0);
+}
+
+.streakLost {
+  background-color: rgb(65, 0, 0);
+  color: rgb(255, 136, 136);
+}
+
+.today {
+  background-color: rgb(89, 250, 89);
+  color: rgb(15, 44, 15);
+}
+
+.upcoming{
+  background-color: #555454;
+  color: rgb(141, 140, 140);
+}
+
+.calendarEvents{
+  >ul{
+    padding-left: 0px;
+
+    >li {
+      background-color: #999999bf;
+      color: white;
+      padding: 15px;
+      border-radius: 20px;
+      list-style-type: none;
+      margin-top: 5px;
+      margin-bottom: 5px;
+
+      > h3, h4{
+        margin-top: 2px;
+        margin-bottom: 2px;
+      }
+    }
+  }
+}
+
 .delete-button {
   grid-column: 1/1;
   background-color: red;

@@ -8,6 +8,8 @@ import Welcome from './pages/Welcome';
 import PlantDetail from './pages/PlantDetail';
 import Profile from './pages/Profile';
 import Shop from './pages/Shop';
+import Social from './pages/Social';
+import Calendar from './pages/Calendar';
 
 import { HabitsProvider } from './context/HabitsContext';
 
@@ -38,6 +40,8 @@ function App() {
           <Route path="/plants/:id" element={<PrivateRoute><PlantDetail /></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="/shop" element={<PrivateRoute><Shop /></PrivateRoute>} />
+          <Route path="/social" element={<PrivateRoute><Social /></PrivateRoute>} />
+          <Route path="/calendar" element={<PrivateRoute><Calendar /></PrivateRoute>} />
 
           {/* Root redirect */}
           <Route
